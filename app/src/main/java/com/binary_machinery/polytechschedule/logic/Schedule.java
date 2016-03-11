@@ -26,6 +26,16 @@ public class Schedule {
         public String course;
         public String room;
         public String lecturer;
+
+        @Override
+        public String toString() {
+            StringBuilder builder = new StringBuilder();
+            builder.append(id).append(": ").append(date).append(" ").append(time).append('\n')
+                    .append(type).append(", ").append(room).append('\n')
+                    .append(course).append('\n')
+                    .append(lecturer);
+            return builder.toString();
+        }
     }
 
     public String[] header;

@@ -17,10 +17,17 @@ import java.util.ArrayList;
  * Created by fckrsns on 11.03.2016.
  */
 public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
-    private Context m_context;
 
-    public ScheduleParser(Context context) {
+    public interface ResultReceiver {
+        void receive(Schedule schedule);
+    }
+
+    private Context m_context;
+    private ResultReceiver m_resultReceiver;
+
+    public ScheduleParser(Context context, ResultReceiver receiver) {
         m_context = context;
+        m_resultReceiver = receiver;
     }
 
     @Override
@@ -73,6 +80,7 @@ public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
             Toast.makeText(m_context, R.string.task_parsing_failed, Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(m_context, R.string.task_parsing_finished, Toast.LENGTH_SHORT).show();
+            m_resultReceiver.receive(schedule);
         }
     }
 }

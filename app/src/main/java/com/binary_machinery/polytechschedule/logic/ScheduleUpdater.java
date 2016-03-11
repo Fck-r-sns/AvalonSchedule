@@ -10,15 +10,17 @@ import org.jsoup.nodes.Document;
 public class ScheduleUpdater {
 
     private Context m_context;
+    private ScheduleParser.ResultReceiver m_scheduleReceiver;
     private ScheduleLoader.ResultReceiver m_loaderResultReceiver = new ScheduleLoader.ResultReceiver() {
         @Override
         public void receive(Document doc) {
-            new ScheduleParser(m_context).execute(doc);
+            new ScheduleParser(m_context, m_scheduleReceiver).execute(doc);
         }
     };
 
-    public ScheduleUpdater(Context context) {
+    public ScheduleUpdater(Context context, ScheduleParser.ResultReceiver receiver) {
         m_context = context;
+        m_scheduleReceiver = receiver;
     }
 
     public void update() {
