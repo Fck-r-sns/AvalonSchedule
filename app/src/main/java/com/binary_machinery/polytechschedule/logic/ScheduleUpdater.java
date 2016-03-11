@@ -2,6 +2,8 @@ package com.binary_machinery.polytechschedule.logic;
 
 import android.content.Context;
 
+import org.jsoup.nodes.Document;
+
 /**
  * Created by fckrsns on 11.03.2016.
  */
@@ -10,8 +12,8 @@ public class ScheduleUpdater {
     private Context m_context;
     private ScheduleLoader.ResultReceiver m_loaderResultReceiver = new ScheduleLoader.ResultReceiver() {
         @Override
-        public void receive(String html) {
-            new ScheduleParser(m_context).execute(html);
+        public void receive(Document doc) {
+            new ScheduleParser(m_context).execute(doc);
         }
     };
 
