@@ -6,18 +6,18 @@ import android.widget.Toast;
 
 import com.binary_machinery.polytechschedule.R;
 
-import java.io.BufferedReader;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 
 /**
  * Created by fckrsns on 11.03.2016.
  */
-public class ScheduleLoader extends AsyncTask<String, Void, String> {
+public class ScheduleLoader extends AsyncTask<String, Void, Document> {
 
     public interface ResultReceiver {
-        void receive(String html);
+        void receive(Document doc);
     }
 
     private Context m_context;
@@ -29,24 +29,10 @@ public class ScheduleLoader extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... urlStrings) {
-        if (urlStrings.length != 1) {
-            return null;
-        }
+    protected Document doInBackground(String... urlStrings) {
         String urlString = urlStrings[0];
         try {
-            URL url = new URL(urlString);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-            try {
-                StringBuilder builder = new StringBuilder();
-                String newLine;
-                while ((newLine = reader.readLine()) != null) {
-                    builder.append(newLine).append('\n');
-                }
-                return builder.toString();
-            } finally {
-                reader.close();
-            }
+            return Jsoup.connect(urlString).get();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -59,8 +45,12 @@ public class ScheduleLoader extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        Toast.makeText(m_context, R.string.task_loading_finished, Toast.LENGTH_SHORT).show();
-        m_resultReceiver.receive(s);
+    protected void onPostExecute(Document doc) {
+        if (doc == null) {
+            Toast.makeText(m_context, R.string.task_loading_failed, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(m_context, R.string.task_loading_finished, Toast.LENGTH_SHORT).show();
+            m_resultReceiver.receive(doc);
+        }
     }
 }
