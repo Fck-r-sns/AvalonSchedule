@@ -54,7 +54,13 @@ public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
                 r.id = -1;
             }
 
-            r.date = row.select(".weekday").text();
+            Elements currentWeekday = row.select(".currentweekday");
+            if (currentWeekday.size() > 0) {
+                r.date = currentWeekday.text();
+            } else {
+                r.date = row.select(".weekday").text();
+            }
+
             // date uses header tags (<th>) and breaks column ordering when row parsed by <td>
             String rawTime = columns.get(Schedule.Column.Time.ordinal() - 1).html();
             rawTime = rawTime.replace("<sup class=\"min\">", ".");
