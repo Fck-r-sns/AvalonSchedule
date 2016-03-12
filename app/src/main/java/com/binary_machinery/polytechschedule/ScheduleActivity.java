@@ -44,6 +44,9 @@ public class ScheduleActivity extends AppCompatActivity {
             case R.id.menu_settings:
                 showSettings();
                 break;
+            case R.id.menu_about:
+                showAbout();
+                break;
             default:
                 break;
         }
@@ -71,6 +74,10 @@ public class ScheduleActivity extends AppCompatActivity {
     private void showSettings() {
         Intent settingsIntent = new Intent(this, SettingsActivity.class);
         startActivity(settingsIntent);
+    }
+
+    private void showAbout() {
+        // TODO: implement
     }
 
     private void printSchedule(List<ScheduleRecord> records) {
