@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.binary_machinery.polytechschedule.R;
+import com.binary_machinery.polytechschedule.data.Schedule;
+import com.binary_machinery.polytechschedule.data.ScheduleRecord;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,7 +46,7 @@ public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
         }
         schedule.data = new ArrayList<>(rows.size() - 1); // -1 for header
         for (int rowIndex = 1; rowIndex < rows.size(); ++rowIndex) {
-            Schedule.Record r = new Schedule.Record();
+            ScheduleRecord r = new ScheduleRecord();
             Element row = rows.get(rowIndex);
             Elements columns = row.getElementsByTag("td");
             try {
