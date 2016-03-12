@@ -10,7 +10,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.binary_machinery.polytechschedule.data.DbProvider;
-import com.binary_machinery.polytechschedule.data.Schedule;
 import com.binary_machinery.polytechschedule.tools.ScheduleParser;
 import com.binary_machinery.polytechschedule.tools.ScheduleStorager;
 import com.binary_machinery.polytechschedule.tools.ScheduleUpdater;
@@ -58,15 +57,15 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void updateSchedule() {
-        new ScheduleUpdater(this, new ScheduleParser.ResultReceiver() {
+        ScheduleParser.ResultReceiver callback = new ScheduleParser.ResultReceiver() {
             @Override
-            public void receive(Schedule schedule) {
-                List<ScheduleRecord> records = schedule.data;
+            public void receive(List<ScheduleRecord> records) {
                 ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
                 storager.store(records);
                 printSchedule(records);
             }
-        }).update();
+        };
+        new ScheduleUpdater(this, callback).update();
     }
 
     private void showSettings() {

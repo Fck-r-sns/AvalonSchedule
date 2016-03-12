@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.binary_machinery.polytechschedule.R;
-import com.binary_machinery.polytechschedule.data.Schedule;
+import com.binary_machinery.polytechschedule.data.ScheduleColumn;
 import com.binary_machinery.polytechschedule.data.ScheduleRecord;
 
 import org.jsoup.Jsoup;
@@ -14,14 +14,15 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by fckrsns on 11.03.2016.
  */
-public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
+public class ScheduleParser extends AsyncTask<Document, Void, List<ScheduleRecord>> {
 
     public interface ResultReceiver {
-        void receive(Schedule schedule);
+        void receive(List<ScheduleRecord> records);
     }
 
     private Context m_context;
@@ -33,24 +34,18 @@ public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
     }
 
     @Override
-    protected Schedule doInBackground(Document... params) {
+    protected List<ScheduleRecord> doInBackground(Document... params) {
         Document doc = params[0];
-        Schedule schedule = new Schedule();
         Element table = doc.select(".schedule").get(0);
         Elements rows = table.getElementsByTag("tr");
-        Element header = rows.first();
-        Elements parsedHeader = header.getElementsByTag("th");
-        schedule.header = new String[parsedHeader.size()];
-        for (int i = 0; i < parsedHeader.size(); ++i) {
-            schedule.header[i] = parsedHeader.get(i).text();
-        }
-        schedule.data = new ArrayList<>(rows.size() - 1); // -1 for header
+        List<ScheduleRecord> records = new ArrayList<>(rows.size() - 1); // -1 for header
+        // skip header, start with rowIndex = 1
         for (int rowIndex = 1; rowIndex < rows.size(); ++rowIndex) {
             ScheduleRecord r = new ScheduleRecord();
             Element row = rows.get(rowIndex);
             Elements columns = row.getElementsByTag("td");
             try {
-                r.id = Integer.parseInt(columns.get(Schedule.Column.Id.ordinal()).text());
+                r.id = Integer.parseInt(columns.get(ScheduleColumn.Id.ordinal()).text());
             } catch (NumberFormatException e) {
                 e.printStackTrace();
                 r.id = -1;
@@ -64,17 +59,17 @@ public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
             }
 
             // date uses header tags (<th>) and breaks column ordering when row parsed by <td>
-            String rawTime = columns.get(Schedule.Column.Time.ordinal() - 1).html();
+            String rawTime = columns.get(ScheduleColumn.Time.ordinal() - 1).html();
             rawTime = rawTime.replace("<sup class=\"min\">", ".");
             r.time = Jsoup.parse(rawTime).text();
-            r.type = columns.get(Schedule.Column.Type.ordinal() - 1).text();
-            r.course = columns.get(Schedule.Column.Course.ordinal() - 1).text();
-            r.room = columns.get(Schedule.Column.Room.ordinal() - 1).text();
-            r.lecturer = columns.get(Schedule.Column.Lecturer.ordinal() - 1).text();
-            schedule.data.add(r);
+            r.type = columns.get(ScheduleColumn.Type.ordinal() - 1).text();
+            r.course = columns.get(ScheduleColumn.Course.ordinal() - 1).text();
+            r.room = columns.get(ScheduleColumn.Room.ordinal() - 1).text();
+            r.lecturer = columns.get(ScheduleColumn.Lecturer.ordinal() - 1).text();
+            records.add(r);
         }
 
-        return schedule;
+        return records;
     }
 
     @Override
@@ -83,7 +78,7 @@ public class ScheduleParser extends AsyncTask<Document, Void, Schedule> {
     }
 
     @Override
-    protected void onPostExecute(Schedule schedule) {
+    protected void onPostExecute(List<ScheduleRecord> schedule) {
         if (schedule == null) {
             Toast.makeText(m_context, R.string.task_parsing_failed, Toast.LENGTH_SHORT).show();
         } else {
