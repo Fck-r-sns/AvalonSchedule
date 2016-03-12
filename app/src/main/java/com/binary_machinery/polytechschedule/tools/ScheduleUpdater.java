@@ -1,4 +1,4 @@
-package com.binary_machinery.polytechschedule.logic;
+package com.binary_machinery.polytechschedule.tools;
 
 import android.content.Context;
 
