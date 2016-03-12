@@ -23,8 +23,7 @@ public class ScheduleUpdater {
         m_scheduleReceiver = receiver;
     }
 
-    public void update() {
-        String url = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
-        new ScheduleLoader(m_context, m_loaderResultReceiver).execute(url);
+    public void update(String sourceUrl) {
+        new ScheduleLoader(m_context, m_loaderResultReceiver).execute(sourceUrl);
     }
 }

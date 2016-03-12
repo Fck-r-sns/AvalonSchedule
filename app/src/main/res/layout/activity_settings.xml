@@ -10,6 +10,7 @@
     tools:context="com.binary_machinery.polytechschedule.SettingsActivity">
 
     <TextView
+        android:id="@+id/settings_test_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings" />

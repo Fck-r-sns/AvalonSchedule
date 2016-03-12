@@ -1,6 +1,7 @@
 package com.binary_machinery.polytechschedule;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -41,6 +42,9 @@ public class ScheduleActivity extends AppCompatActivity {
             case R.id.menu_update:
                 updateSchedule();
                 break;
+            case R.id.menu_test_update:
+                testUpdateSchedule();
+                break;
             case R.id.menu_settings:
                 showSettings();
                 break;
@@ -68,7 +72,21 @@ public class ScheduleActivity extends AppCompatActivity {
                 printSchedule(records);
             }
         };
-        new ScheduleUpdater(this, callback).update();
+        String url = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
+        new ScheduleUpdater(this, callback).update(url);
+    }
+
+    private void testUpdateSchedule() {
+        ScheduleParser.ResultReceiver callback = new ScheduleParser.ResultReceiver() {
+            @Override
+            public void receive(List<ScheduleRecord> records) {
+                ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
+                storager.store(records);
+                printSchedule(records);
+            }
+        };
+        String url = "http://www.avalon.ru/HigherEducation/MasterDesign/Schedule/Semester3/Groups/?GroupID=12268#";
+        new ScheduleUpdater(this, callback).update(url);
     }
 
     private void showSettings() {
