@@ -9,4 +9,5 @@
     <string name="task_parsing_in_process">Parsing…</string>
     <string name="task_parsing_finished">Parsing has been finished</string>
     <string name="task_parsing_failed">Parsing has been failed</string>
+    <string name="parsing_error">Parsing error</string>
 </resources>

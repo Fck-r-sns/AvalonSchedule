@@ -51,21 +51,32 @@ public class ScheduleParser extends AsyncTask<Document, Void, List<ScheduleRecor
                 r.id = -1;
             }
 
-            Elements currentWeekday = row.select(".currentweekday");
-            if (currentWeekday.size() > 0) {
-                r.date = currentWeekday.text();
+            String dateString = row.select(".weekday").text();
+            if (dateString.isEmpty()) {
+                dateString = row.select(".currentweekday").text();
+            }
+            if (dateString.isEmpty()) {
+                dateString = row.select(".holiday").text();
+            }
+
+            if (dateString.isEmpty()) {
+                String errorText = m_context.getString(R.string.parsing_error);
+                r.date = errorText;
+                r.weekday = errorText;
             } else {
-                r.date = row.select(".weekday").text();
+                String[] dateStringSplit = dateString.split(" ");
+                r.date = dateStringSplit[0];
+                r.weekday = dateStringSplit[1];
             }
 
             // date uses header tags (<th>) and breaks column ordering when row parsed by <td>
-            String rawTime = columns.get(ScheduleColumn.Time.ordinal() - 1).html();
+            String rawTime = columns.get(ScheduleColumn.Time.ordinal() - 2).html();
             rawTime = rawTime.replace("<sup class=\"min\">", ".");
             r.time = Jsoup.parse(rawTime).text();
-            r.type = columns.get(ScheduleColumn.Type.ordinal() - 1).text();
-            r.course = columns.get(ScheduleColumn.Course.ordinal() - 1).text();
-            r.room = columns.get(ScheduleColumn.Room.ordinal() - 1).text();
-            r.lecturer = columns.get(ScheduleColumn.Lecturer.ordinal() - 1).text();
+            r.type = columns.get(ScheduleColumn.Type.ordinal() - 2).text();
+            r.course = columns.get(ScheduleColumn.Course.ordinal() - 2).text();
+            r.room = columns.get(ScheduleColumn.Room.ordinal() - 2).text();
+            r.lecturer = columns.get(ScheduleColumn.Lecturer.ordinal() - 2).text();
             records.add(r);
         }
 

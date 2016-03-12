@@ -1,9 +1,9 @@
 package com.binary_machinery.polytechschedule.tools;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.binary_machinery.polytechschedule.data.DbProvider;
 import com.binary_machinery.polytechschedule.data.ScheduleRecord;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ScheduleStorager {
     public void store(List<ScheduleRecord> records) {
         SQLiteDatabase db = m_dbProvider.getWritableDatabase();
         for (ScheduleRecord r : records) {
-            r.save(db);
+            storeRecord(r, db);
         }
     }
 
@@ -33,6 +33,7 @@ public class ScheduleStorager {
             if (cursor.moveToFirst()) {
                 int idIdx = cursor.getColumnIndex(DbProvider.KEY_ID);
                 int dateIdx = cursor.getColumnIndex(DbProvider.KEY_DATE);
+                int weekdayIdx = cursor.getColumnIndex(DbProvider.KEY_WEEKDAY);
                 int timeIdx = cursor.getColumnIndex(DbProvider.KEY_TIME);
                 int typeIdx = cursor.getColumnIndex(DbProvider.KEY_TYPE);
                 int courseIdx = cursor.getColumnIndex(DbProvider.KEY_COURSE);
@@ -44,6 +45,7 @@ public class ScheduleStorager {
                     ScheduleRecord r = new ScheduleRecord();
                     r.id = cursor.getInt(idIdx);
                     r.date = cursor.getString(dateIdx);
+                    r.weekday = cursor.getString(weekdayIdx);
                     r.time = cursor.getString(timeIdx);
                     r.type = cursor.getString(typeIdx);
                     r.course = cursor.getString(courseIdx);
@@ -58,5 +60,18 @@ public class ScheduleStorager {
         } finally {
             cursor.close();
         }
+    }
+
+    private static void storeRecord(ScheduleRecord record, SQLiteDatabase db) {
+        ContentValues cv = new ContentValues();
+        cv.put(DbProvider.KEY_ID, record.id);
+        cv.put(DbProvider.KEY_DATE, record.date);
+        cv.put(DbProvider.KEY_WEEKDAY, record.weekday);
+        cv.put(DbProvider.KEY_TIME, record.time);
+        cv.put(DbProvider.KEY_TYPE, record.type);
+        cv.put(DbProvider.KEY_COURSE, record.course);
+        cv.put(DbProvider.KEY_ROOM, record.room);
+        cv.put(DbProvider.KEY_LECTURER, record.lecturer);
+        db.insert(DbProvider.TABLE_NAME, null, cv);
     }
 }

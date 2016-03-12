@@ -6,10 +6,10 @@ package com.binary_machinery.polytechschedule.data;
 public enum ScheduleColumn {
     Id,
     Date,
+    Weekday,
     Time,
     Type,
     Course,
     Room,
-    Lecturer,
-    COUNT
+    Lecturer
 }

@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.binary_machinery.polytechschedule.data.DbProvider;
+import com.binary_machinery.polytechschedule.tools.DbProvider;
 import com.binary_machinery.polytechschedule.tools.ScheduleParser;
 import com.binary_machinery.polytechschedule.tools.ScheduleStorager;
 import com.binary_machinery.polytechschedule.tools.ScheduleUpdater;

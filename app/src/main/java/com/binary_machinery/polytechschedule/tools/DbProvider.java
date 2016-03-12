@@ -1,4 +1,4 @@
-package com.binary_machinery.polytechschedule.data;
+package com.binary_machinery.polytechschedule.tools;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +14,7 @@ public class DbProvider extends SQLiteOpenHelper {
 
     public static final String KEY_ID = "_id";
     public static final String KEY_DATE = "date";
+    public static final String KEY_WEEKDAY = "weekday";
     public static final String KEY_TIME = "time";
     public static final String KEY_TYPE = "type";
     public static final String KEY_COURSE = "course";
@@ -30,6 +31,7 @@ public class DbProvider extends SQLiteOpenHelper {
         queryBuilder.append("CREATE TABLE ").append(TABLE_NAME).append(" (")
                 .append(KEY_ID).append(" INTEGER PRIMARY KEY, ")
                 .append(KEY_DATE).append(" TEXT, ")
+                .append(KEY_WEEKDAY).append(" TEXT, ")
                 .append(KEY_TIME).append(" TEXT, ")
                 .append(KEY_TYPE).append(" TEXT, ")
                 .append(KEY_COURSE).append(" TEXT, ")
