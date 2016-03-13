@@ -1,7 +1,6 @@
 package com.binary_machinery.polytechschedule;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,8 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.binary_machinery.polytechschedule.data.Schedule;
 import com.binary_machinery.polytechschedule.tools.DbProvider;
-import com.binary_machinery.polytechschedule.tools.ScheduleParser;
 import com.binary_machinery.polytechschedule.tools.ScheduleStorager;
 import com.binary_machinery.polytechschedule.tools.ScheduleUpdater;
 import com.binary_machinery.polytechschedule.data.ScheduleRecord;
@@ -59,34 +58,26 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void restoreScheduleFromDb() {
         ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
-        List<ScheduleRecord> records = storager.restore();
-        printSchedule(records);
+        Schedule schedule = storager.restore();
+        List<ScheduleRecord> records = schedule.getRecords();
+        printScheduleRecords(records);
     }
 
     private void updateSchedule() {
-        ScheduleParser.ResultReceiver callback = new ScheduleParser.ResultReceiver() {
+        ScheduleUpdater.ResultReceiver callback = new ScheduleUpdater.ResultReceiver() {
             @Override
-            public void receive(List<ScheduleRecord> records) {
+            public void receive(Schedule schedule) {
                 ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
-                storager.store(records);
-                printSchedule(records);
+                storager.store(schedule);
+                List<ScheduleRecord> records = schedule.getRecords();
+                printScheduleRecords(records);
             }
         };
         String url = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
-        new ScheduleUpdater(this, callback).update(url);
+        new ScheduleUpdater(this, url, callback).update();
     }
 
     private void testUpdateSchedule() {
-        ScheduleParser.ResultReceiver callback = new ScheduleParser.ResultReceiver() {
-            @Override
-            public void receive(List<ScheduleRecord> records) {
-                ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
-                storager.store(records);
-                printSchedule(records);
-            }
-        };
-        String url = "http://www.avalon.ru/HigherEducation/MasterDesign/Schedule/Semester3/Groups/?GroupID=12268#";
-        new ScheduleUpdater(this, callback).update(url);
     }
 
     private void showSettings() {
@@ -98,7 +89,7 @@ public class ScheduleActivity extends AppCompatActivity {
         // TODO: implement
     }
 
-    private void printSchedule(List<ScheduleRecord> records) {
+    private void printScheduleRecords(List<ScheduleRecord> records) {
         ListView list = (ListView) findViewById(R.id.scheduleList);
         ListAdapter adapter = new ArrayAdapter<ScheduleRecord>(ScheduleActivity.this, android.R.layout.simple_list_item_1, records);
         list.setAdapter(adapter);
