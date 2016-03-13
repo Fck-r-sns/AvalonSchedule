@@ -51,14 +51,7 @@ public class ScheduleParser extends AsyncTask<Document, Void, List<ScheduleRecor
                 r.id = -1;
             }
 
-            String dateString = row.select(".weekday").text();
-            if (dateString.isEmpty()) {
-                dateString = row.select(".currentweekday").text();
-            }
-            if (dateString.isEmpty()) {
-                dateString = row.select(".holiday").text();
-            }
-
+            String dateString = row.getElementsByTag("th").text(); // date and weekday use header tag instead of normal row
             if (dateString.isEmpty()) {
                 String errorText = m_context.getString(R.string.parsing_error);
                 r.date = errorText;
