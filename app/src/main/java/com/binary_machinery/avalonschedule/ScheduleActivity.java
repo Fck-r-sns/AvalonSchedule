@@ -19,6 +19,7 @@ import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
 import java.util.List;
 
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -71,10 +72,14 @@ public class ScheduleActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.task_loading_in_process, Toast.LENGTH_SHORT).show();
         Observable.just(sourceUrl)
                 .concatMap(ScheduleUpdater::get)
+                .map(schedule -> {
+                    ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
+                    storager.store(schedule);
+                    return schedule;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         schedule -> {
-                            ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
-                            storager.store(schedule);
                             List<ScheduleRecord> records = schedule.getRecords();
                             printScheduleRecords(records);
                         },
