@@ -1,12 +1,12 @@
-package com.binary_machinery.polytechschedule.tools;
+package com.binary_machinery.avalonchedule.tools;
 
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import com.binary_machinery.polytechschedule.R;
-import com.binary_machinery.polytechschedule.data.ScheduleColumn;
-import com.binary_machinery.polytechschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonchedule.data.ScheduleColumn;
+import com.binary_machinery.avalonchedule.data.ScheduleRecord;
+import com.binary_machinery.avalonschedule.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

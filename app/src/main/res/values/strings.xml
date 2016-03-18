@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Polytech schedule</string>
+    <string name="app_name">Avalon schedule</string>
     <string name="settings_activity_title">Settings</string>
     <string name="menu_update">Update</string>
     <string name="menu_settings">Settings</string>

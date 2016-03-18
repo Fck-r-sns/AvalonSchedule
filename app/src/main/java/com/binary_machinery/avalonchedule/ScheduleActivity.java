@@ -1,4 +1,4 @@
-package com.binary_machinery.polytechschedule;
+package com.binary_machinery.avalonchedule;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,11 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.binary_machinery.polytechschedule.data.Schedule;
-import com.binary_machinery.polytechschedule.tools.DbProvider;
-import com.binary_machinery.polytechschedule.tools.ScheduleStorager;
-import com.binary_machinery.polytechschedule.tools.ScheduleUpdater;
-import com.binary_machinery.polytechschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonchedule.data.Schedule;
+import com.binary_machinery.avalonchedule.data.ScheduleRecord;
+import com.binary_machinery.avalonchedule.tools.DbProvider;
+import com.binary_machinery.avalonchedule.tools.ScheduleStorager;
+import com.binary_machinery.avalonchedule.tools.ScheduleUpdater;
+import com.binary_machinery.avalonschedule.R;
 
 import java.util.List;
 
@@ -64,14 +65,11 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void updateSchedule() {
-        ScheduleUpdater.ResultReceiver callback = new ScheduleUpdater.ResultReceiver() {
-            @Override
-            public void receive(Schedule schedule) {
-                ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
-                storager.store(schedule);
-                List<ScheduleRecord> records = schedule.getRecords();
-                printScheduleRecords(records);
-            }
+        ScheduleUpdater.ResultReceiver callback = schedule -> {
+            ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
+            storager.store(schedule);
+            List<ScheduleRecord> records = schedule.getRecords();
+            printScheduleRecords(records);
         };
         String url = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
         new ScheduleUpdater(this, url, callback).update();

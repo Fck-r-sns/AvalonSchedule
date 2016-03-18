@@ -1,10 +1,10 @@
-package com.binary_machinery.polytechschedule.tools;
+package com.binary_machinery.avalonchedule.tools;
 
 import android.content.Context;
 
-import com.binary_machinery.polytechschedule.data.Schedule;
-import com.binary_machinery.polytechschedule.data.ScheduleMetadata;
-import com.binary_machinery.polytechschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonchedule.data.Schedule;
+import com.binary_machinery.avalonchedule.data.ScheduleMetadata;
+import com.binary_machinery.avalonchedule.data.ScheduleRecord;
 
 import org.jsoup.nodes.Document;
 

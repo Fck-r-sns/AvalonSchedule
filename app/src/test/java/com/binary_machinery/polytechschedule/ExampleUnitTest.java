@@ -1,4 +1,4 @@
-package com.binary_machinery.polytechschedule;
+package com.binary_machinery.avalonschedule;
 
 import org.junit.Test;
 

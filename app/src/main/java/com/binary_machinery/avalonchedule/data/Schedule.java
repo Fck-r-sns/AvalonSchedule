@@ -1,4 +1,4 @@
-package com.binary_machinery.polytechschedule.data;
+package com.binary_machinery.avalonchedule.data;
 
 import java.util.List;
 

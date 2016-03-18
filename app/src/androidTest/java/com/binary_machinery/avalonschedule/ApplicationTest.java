@@ -1,4 +1,4 @@
-package com.binary_machinery.polytechschedule;
+package com.binary_machinery.avalonschedule;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

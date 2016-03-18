@@ -1,12 +1,12 @@
-package com.binary_machinery.polytechschedule.tools;
+package com.binary_machinery.avalonchedule.tools;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.binary_machinery.polytechschedule.data.Schedule;
-import com.binary_machinery.polytechschedule.data.ScheduleMetadata;
-import com.binary_machinery.polytechschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonchedule.data.Schedule;
+import com.binary_machinery.avalonchedule.data.ScheduleMetadata;
+import com.binary_machinery.avalonchedule.data.ScheduleRecord;
 
 import java.util.ArrayList;
 import java.util.List;
