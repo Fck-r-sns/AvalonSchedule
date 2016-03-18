@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.binary_machinery.avalonchedule.data.Schedule;
 import com.binary_machinery.avalonchedule.data.ScheduleRecord;
@@ -17,6 +18,8 @@ import com.binary_machinery.avalonchedule.tools.ScheduleUpdater;
 import com.binary_machinery.avalonschedule.R;
 
 import java.util.List;
+
+import rx.Observable;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -65,14 +68,20 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void updateSchedule() {
-        ScheduleUpdater.ResultReceiver callback = schedule -> {
-            ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
-            storager.store(schedule);
-            List<ScheduleRecord> records = schedule.getRecords();
-            printScheduleRecords(records);
-        };
-        String url = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
-        new ScheduleUpdater(this, url, callback).update();
+        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
+        Toast.makeText(this, R.string.task_loading_in_process, Toast.LENGTH_SHORT).show();
+        Observable.just(sourceUrl)
+                .concatMap(ScheduleUpdater::get)
+                .subscribe(
+                        schedule -> {
+                            ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
+                            storager.store(schedule);
+                            List<ScheduleRecord> records = schedule.getRecords();
+                            printScheduleRecords(records);
+                        },
+                        throwable -> Toast.makeText(this, R.string.task_loading_failed, Toast.LENGTH_SHORT).show(),
+                        () -> Toast.makeText(this, R.string.task_loading_finished, Toast.LENGTH_SHORT).show()
+                );
     }
 
     private void testUpdateSchedule() {

@@ -1,12 +1,7 @@
 package com.binary_machinery.avalonchedule.tools;
 
-import android.content.Context;
-import android.os.AsyncTask;
-import android.widget.Toast;
-
 import com.binary_machinery.avalonchedule.data.ScheduleColumn;
 import com.binary_machinery.avalonchedule.data.ScheduleRecord;
-import com.binary_machinery.avalonschedule.R;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,78 +11,53 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+import rx.schedulers.Schedulers;
+
 /**
  * Created by fckrsns on 11.03.2016.
  */
-public class ScheduleParser extends AsyncTask<Document, Void, List<ScheduleRecord>> {
+public class ScheduleParser {
 
-    public interface ResultReceiver {
-        void receive(List<ScheduleRecord> records);
+    public static Observable<List<ScheduleRecord>> parse(Document document) {
+        return Observable.just(document)
+                .subscribeOn(Schedulers.computation())
+                .map(doc -> doc.select(".schedule").get(0))
+                .map(table -> table.getElementsByTag("tr"))
+                .concatMap(elements -> Observable.from(elements.subList(0, elements.size())))
+                .skip(1)
+                .map(ScheduleParser::parseRecord)
+                .collect(() -> new ArrayList<ScheduleRecord>(64), List::add);
     }
 
-    private Context m_context;
-    private ResultReceiver m_resultReceiver;
-
-    public ScheduleParser(Context context, ResultReceiver receiver) {
-        m_context = context;
-        m_resultReceiver = receiver;
-    }
-
-    @Override
-    protected List<ScheduleRecord> doInBackground(Document... params) {
-        Document doc = params[0];
-        Element table = doc.select(".schedule").get(0);
-        Elements rows = table.getElementsByTag("tr");
-        List<ScheduleRecord> records = new ArrayList<>(rows.size() - 1); // -1 for header
-        // skip header, start with rowIndex = 1
-        for (int rowIndex = 1; rowIndex < rows.size(); ++rowIndex) {
-            ScheduleRecord r = new ScheduleRecord();
-            Element row = rows.get(rowIndex);
-            Elements columns = row.getElementsByTag("td");
-            try {
-                r.id = Integer.parseInt(columns.get(ScheduleColumn.Id.ordinal()).text());
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-                r.id = -1;
-            }
-
-            String dateString = row.getElementsByTag("th").text(); // date and weekday use header tag instead of normal row
-            if (dateString.isEmpty()) {
-                String errorText = m_context.getString(R.string.parsing_error);
-                r.date = errorText;
-                r.weekday = errorText;
-            } else {
-                String[] dateStringSplit = dateString.split(" ");
-                r.date = dateStringSplit[0];
-                r.weekday = dateStringSplit[1];
-            }
-
-            // date uses header tags (<th>) and breaks column ordering when row parsed by <td>
-            String rawTime = columns.get(ScheduleColumn.Time.ordinal() - 2).html();
-            rawTime = rawTime.replace("<sup class=\"min\">", ".");
-            r.time = Jsoup.parse(rawTime).text();
-            r.type = columns.get(ScheduleColumn.Type.ordinal() - 2).text();
-            r.course = columns.get(ScheduleColumn.Course.ordinal() - 2).text();
-            r.room = columns.get(ScheduleColumn.Room.ordinal() - 2).text();
-            r.lecturer = columns.get(ScheduleColumn.Lecturer.ordinal() - 2).text();
-            records.add(r);
+    private static ScheduleRecord parseRecord(Element element) {
+        ScheduleRecord record = new ScheduleRecord();
+        Elements columns = element.getElementsByTag("td");
+        try {
+            record.id = Integer.parseInt(columns.get(ScheduleColumn.Id.ordinal()).text());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            record.id = -1;
         }
 
-        return records;
-    }
-
-    @Override
-    protected void onPreExecute() {
-        Toast.makeText(m_context, R.string.task_parsing_in_process, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onPostExecute(List<ScheduleRecord> schedule) {
-        if (schedule == null) {
-            Toast.makeText(m_context, R.string.task_parsing_failed, Toast.LENGTH_SHORT).show();
+        String dateString = element.getElementsByTag("th").text(); // date and weekday use header tag instead of normal row
+        if (dateString.isEmpty()) {
+            record.date = "Parsing error";
+            record.weekday = "Parsing error";
         } else {
-            Toast.makeText(m_context, R.string.task_parsing_finished, Toast.LENGTH_SHORT).show();
-            m_resultReceiver.receive(schedule);
+            String[] dateStringSplit = dateString.split(" ");
+            record.date = dateStringSplit[0];
+            record.weekday = dateStringSplit[1];
         }
+
+        // date uses header tags (<th>) and breaks column ordering when row parsed by <td>
+        String rawTime = columns.get(ScheduleColumn.Time.ordinal() - 2).html();
+        rawTime = rawTime.replace("<sup class=\"min\">", ".");
+        record.time = Jsoup.parse(rawTime).text();
+        record.type = columns.get(ScheduleColumn.Type.ordinal() - 2).text();
+        record.course = columns.get(ScheduleColumn.Course.ordinal() - 2).text();
+        record.room = columns.get(ScheduleColumn.Room.ordinal() - 2).text();
+        record.lecturer = columns.get(ScheduleColumn.Lecturer.ordinal() - 2).text();
+        return record;
     }
 }
