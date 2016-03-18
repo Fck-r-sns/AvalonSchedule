@@ -10,7 +10,8 @@ import rx.Observable;
  */
 public class ScheduleUpdater {
     public static Observable<Schedule> get(String sourceUrl) {
-        return ScheduleLoader.load(sourceUrl)
+        return Observable.just(sourceUrl)
+                .concatMap(ScheduleLoader::load)
                 .concatMap(ScheduleParser::parse)
                 .map(records -> {
                     Schedule schedule = new Schedule();
