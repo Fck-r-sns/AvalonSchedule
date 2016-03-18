@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonchedule.tools;
+package com.binary_machinery.avalonschedule.tools;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

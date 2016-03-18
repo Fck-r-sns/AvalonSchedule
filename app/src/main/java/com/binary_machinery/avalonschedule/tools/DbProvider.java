@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonchedule.tools;
+package com.binary_machinery.avalonschedule.tools;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

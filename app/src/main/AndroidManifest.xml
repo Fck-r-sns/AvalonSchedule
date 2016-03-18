@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.binary_machinery.avalonchedule.ScheduleActivity"
+        <activity android:name=".ScheduleActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,9 +21,9 @@
         </activity>
 
         <activity
-            android:name="com.binary_machinery.avalonchedule.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/settings_activity_title"
-            android:parentActivityName="com.binary_machinery.avalonchedule.ScheduleActivity"/>
+            android:parentActivityName=".ScheduleActivity"/>
     </application>
 
 </manifest>

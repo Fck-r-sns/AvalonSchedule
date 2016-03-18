@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonchedule;
+package com.binary_machinery.avalonschedule;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +10,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.binary_machinery.avalonchedule.data.Schedule;
-import com.binary_machinery.avalonchedule.data.ScheduleRecord;
-import com.binary_machinery.avalonchedule.tools.DbProvider;
-import com.binary_machinery.avalonchedule.tools.ScheduleStorager;
-import com.binary_machinery.avalonchedule.tools.ScheduleUpdater;
-import com.binary_machinery.avalonschedule.R;
+import com.binary_machinery.avalonschedule.data.Schedule;
+import com.binary_machinery.avalonschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonschedule.tools.DbProvider;
+import com.binary_machinery.avalonschedule.tools.ScheduleStorager;
+import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
 
 import java.util.List;
 

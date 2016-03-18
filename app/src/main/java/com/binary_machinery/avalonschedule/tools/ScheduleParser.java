@@ -1,7 +1,7 @@
-package com.binary_machinery.avalonchedule.tools;
+package com.binary_machinery.avalonschedule.tools;
 
-import com.binary_machinery.avalonchedule.data.ScheduleColumn;
-import com.binary_machinery.avalonchedule.data.ScheduleRecord;
+import com.binary_machinery.avalonschedule.data.ScheduleColumn;
+import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

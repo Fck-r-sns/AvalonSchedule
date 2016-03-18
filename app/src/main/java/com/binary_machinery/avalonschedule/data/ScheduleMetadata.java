@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonchedule.data;
+package com.binary_machinery.avalonschedule.data;
 
 /**
  * Created by fckrsns on 13.03.2016.

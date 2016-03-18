@@ -1,15 +1,8 @@
-package com.binary_machinery.avalonchedule;
+package com.binary_machinery.avalonschedule;
 
 import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.binary_machinery.avalonschedule.R;
-
-import rx.Observable;
 
 public class SettingsActivity extends AppCompatActivity {
 

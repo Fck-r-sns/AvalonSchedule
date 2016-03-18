@@ -1,7 +1,7 @@
-package com.binary_machinery.avalonchedule.tools;
+package com.binary_machinery.avalonschedule.tools;
 
-import com.binary_machinery.avalonchedule.data.Schedule;
-import com.binary_machinery.avalonchedule.data.ScheduleMetadata;
+import com.binary_machinery.avalonschedule.data.Schedule;
+import com.binary_machinery.avalonschedule.data.ScheduleMetadata;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

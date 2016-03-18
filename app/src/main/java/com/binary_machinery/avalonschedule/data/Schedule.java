@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonchedule.data;
+package com.binary_machinery.avalonschedule.data;
 
 import java.util.List;
 
