@@ -1,5 +1,6 @@
 package com.binary_machinery.avalonschedule.tools;
 
+import com.binary_machinery.avalonschedule.Constants;
 import com.binary_machinery.avalonschedule.data.ScheduleColumn;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 
@@ -42,8 +43,8 @@ public class ScheduleParser {
 
         String dateString = element.getElementsByTag("th").text(); // date and weekday use header tag instead of normal row
         if (dateString.isEmpty()) {
-            record.date = "Parsing error";
-            record.weekday = "Parsing error";
+            record.date = Constants.PARSING_ERROR;
+            record.weekday = Constants.PARSING_ERROR;
         } else {
             String[] dateStringSplit = dateString.split(" ");
             record.date = dateStringSplit[0];
