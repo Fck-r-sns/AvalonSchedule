@@ -9,10 +9,32 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.binary_machinery.avalonschedule.SettingsActivity">
 
-    <TextView
-        android:id="@+id/settings_test_view"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings" />
+        android:text="Start service"
+        android:id="@+id/start_service_button"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop service"
+        android:id="@+id/stop_service_button"
+        android:layout_alignBottom="@+id/start_service_button"
+        android:layout_toRightOf="@+id/start_service_button"
+        android:layout_toEndOf="@+id/start_service_button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
