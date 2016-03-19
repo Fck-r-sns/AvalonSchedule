@@ -97,7 +97,6 @@ public class ScheduleStorager {
             e.printStackTrace();
             schedule.setMetadata(new ScheduleMetadata());
             schedule.setRecords(new ArrayList<ScheduleRecord>(0));
-            // TODO: show toast
         }
         return schedule;
     }

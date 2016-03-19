@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.data.Schedule;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
@@ -30,6 +31,8 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
         m_dbProvider = new DbProvider(this);
+        GlobalEnvironment env = GlobalEnvironment.getInstance();
+        env.dbProvider = m_dbProvider;
         restoreScheduleFromDb();
     }
 
@@ -69,14 +72,10 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void updateSchedule() {
         String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
+//        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12284#";
         Toast.makeText(this, R.string.task_loading_in_process, Toast.LENGTH_SHORT).show();
         Observable.just(sourceUrl)
                 .concatMap(ScheduleUpdater::get)
-                .map(schedule -> {
-                    ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
-                    storager.store(schedule);
-                    return schedule;
-                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         schedule -> {
