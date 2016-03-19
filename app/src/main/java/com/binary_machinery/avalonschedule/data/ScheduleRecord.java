@@ -22,4 +22,40 @@ public class ScheduleRecord {
                 .append(lecturer);
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (this == o) {
+            return true;
+        }
+        if (ScheduleRecord.class != o.getClass()) {
+            return false;
+        }
+        ScheduleRecord other = (ScheduleRecord) o;
+        // ignore id
+        return date.equals(other.date)
+                && weekday.equals(other.weekday)
+                && time.equals(other.time)
+                && type.equals(other.type)
+                && course.equals(other.course)
+                && room.equals(other.room)
+                && lecturer.equals(other.lecturer);
+    }
+
+    @Override
+    public int hashCode() {
+        final int COEF = 31;
+        int res = 0;
+        res = COEF * res + date.hashCode();
+        res = COEF * res + weekday.hashCode();
+        res = COEF * res + time.hashCode();
+        res = COEF * res + type.hashCode();
+        res = COEF * res + course.hashCode();
+        res = COEF * res + room.hashCode();
+        res = COEF * res + lecturer.hashCode();
+        return res;
+    }
 }
