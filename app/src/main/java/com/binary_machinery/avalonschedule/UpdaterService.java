@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
 import android.widget.Toast;
@@ -27,17 +28,22 @@ public class UpdaterService extends Service {
             env.dbProvider = new DbProvider(this);
         }
 //        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
-        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester1/Groups/?GroupID=12085";
+//        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester1/Groups/?GroupID=12085";
+        SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
+        String sourceUrl = prefs.getString(Constants.PREF_URL, "");
 
-        Observable.just(sourceUrl)
-                .concatMap(ScheduleUpdater::get)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        schedule -> {
-                        },
-                        throwable -> Toast.makeText(this, R.string.task_loading_failed, Toast.LENGTH_SHORT).show(),
-                        () -> Toast.makeText(this, R.string.task_loading_finished, Toast.LENGTH_SHORT).show()
-                );
+        if (sourceUrl.isEmpty()) {
+            Toast.makeText(this, R.string.task_loading_failed, Toast.LENGTH_SHORT).show();
+        } else {
+            Observable.just(sourceUrl)
+                    .concatMap(ScheduleUpdater::get)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            schedule -> {
+                            },
+                            throwable -> Toast.makeText(this, R.string.task_loading_failed, Toast.LENGTH_SHORT).show()
+                    );
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 

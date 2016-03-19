@@ -1,6 +1,7 @@
 package com.binary_machinery.avalonschedule;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -71,8 +72,10 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void updateSchedule() {
-        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
+//        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
 //        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12284#";
+        SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
+        String sourceUrl = prefs.getString(Constants.PREF_URL, "");
         Toast.makeText(this, R.string.task_loading_in_process, Toast.LENGTH_SHORT).show();
         Observable.just(sourceUrl)
                 .concatMap(ScheduleUpdater::get)
