@@ -47,8 +47,8 @@ public class SettingsActivity extends AppCompatActivity {
             prefEditor.putBoolean(Constants.PREF_IS_SERVICE_ENABLED, true);
             prefEditor.apply();
             am.setInexactRepeating(
-                    AlarmManager.ELAPSED_REALTIME,
-                    Constants.UPDATE_INTERVAL,
+                    AlarmManager.RTC,
+                    System.currentTimeMillis() + Constants.UPDATE_INTERVAL,
                     Constants.UPDATE_INTERVAL,
                     pendingIntent
             );

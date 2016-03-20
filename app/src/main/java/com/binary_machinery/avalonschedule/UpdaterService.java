@@ -27,8 +27,7 @@ public class UpdaterService extends Service {
         if (env.dbProvider == null) {
             env.dbProvider = new DbProvider(this);
         }
-//        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
-//        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester1/Groups/?GroupID=12085";
+
         SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
         String sourceUrl = prefs.getString(Constants.PREF_URL, "");
 
@@ -49,14 +48,14 @@ public class UpdaterService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        throw null;
+        return null;
     }
 
     private void createNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setAutoCancel(true);
-        builder.setContentTitle("Notification");
+        builder.setContentTitle(getString(R.string.app_name));
         builder.setContentText(Calendar.getInstance().getTime().toString());
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

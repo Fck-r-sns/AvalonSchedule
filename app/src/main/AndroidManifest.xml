@@ -3,6 +3,7 @@
     package="com.binary_machinery.avalonschedule">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +29,16 @@
             android:name=".UpdaterService"
             android:enabled="true"
             android:exported="true"
-            android:process=":serviceProcess"/>
+            android:process=":serviceProcess" />
+
+        <receiver
+            android:name=".OnBootStarter"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

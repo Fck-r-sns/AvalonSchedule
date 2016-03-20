@@ -25,15 +25,14 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class ScheduleActivity extends AppCompatActivity {
 
-    private DbProvider m_dbProvider;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        m_dbProvider = new DbProvider(this);
         GlobalEnvironment env = GlobalEnvironment.getInstance();
-        env.dbProvider = m_dbProvider;
+        if (env.dbProvider == null) {
+            env.dbProvider = new DbProvider(this);
+        }
         restoreScheduleFromDb();
     }
 
@@ -65,15 +64,14 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void restoreScheduleFromDb() {
-        ScheduleStorager storager = new ScheduleStorager(m_dbProvider);
+        DbProvider dbProvider = GlobalEnvironment.getInstance().dbProvider;
+        ScheduleStorager storager = new ScheduleStorager(dbProvider);
         Schedule schedule = storager.restore();
         List<ScheduleRecord> records = schedule.getRecords();
         printScheduleRecords(records);
     }
 
     private void updateSchedule() {
-//        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12285";
-//        String sourceUrl = "http://www.avalon.ru/HigherEducation/MasterProgrammingIS/Schedule/Semester3/Groups/?GroupID=12284#";
         SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
         String sourceUrl = prefs.getString(Constants.PREF_URL, "");
         Toast.makeText(this, R.string.task_loading_in_process, Toast.LENGTH_SHORT).show();
