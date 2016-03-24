@@ -66,7 +66,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private void restoreScheduleFromDb() {
         DbProvider dbProvider = GlobalEnvironment.getInstance().dbProvider;
         ScheduleStorager storager = new ScheduleStorager(dbProvider);
-        Schedule schedule = storager.restore();
+        Schedule schedule = storager.restoreSchedule();
         List<ScheduleRecord> records = schedule.getRecords();
         printScheduleRecords(records);
     }
@@ -83,7 +83,7 @@ public class ScheduleActivity extends AppCompatActivity {
                             List<ScheduleRecord> records = schedule.getRecords();
                             printScheduleRecords(records);
                         },
-                        throwable -> Toast.makeText(this, R.string.task_loading_failed, Toast.LENGTH_SHORT).show(),
+                        throwable -> Toast.makeText(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage(), Toast.LENGTH_SHORT).show(),
                         () -> Toast.makeText(this, R.string.task_loading_finished, Toast.LENGTH_SHORT).show()
                 );
     }

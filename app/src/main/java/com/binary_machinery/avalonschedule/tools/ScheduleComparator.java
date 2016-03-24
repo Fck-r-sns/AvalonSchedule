@@ -16,6 +16,8 @@ public class ScheduleComparator {
 
     public boolean compare(Schedule oldSchedule, Schedule newSchedule) {
         if (!oldSchedule.getMetadata().equals(newSchedule.getMetadata())) {
+            m_added = new ArrayList<>(0);
+            m_deleted = new ArrayList<>(0);
             return false;
         }
 

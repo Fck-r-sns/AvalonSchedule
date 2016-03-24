@@ -28,6 +28,13 @@ public class DbProvider extends SQLiteOpenHelper {
         public static final String COLUMN_COURSE = "course";
         public static final String COLUMN_ROOM = "room";
         public static final String COLUMN_LECTURER = "lecturer";
+        public static final String COLUMN_RECORD_TYPE = "record_type";
+
+        public enum Type {
+            Schedule,
+            Added,
+            Deleted
+        }
     }
 
     public DbProvider(Context context) {
@@ -46,7 +53,8 @@ public class DbProvider extends SQLiteOpenHelper {
                     .append(Records.COLUMN_TYPE).append(" TEXT, ")
                     .append(Records.COLUMN_COURSE).append(" TEXT, ")
                     .append(Records.COLUMN_ROOM).append(" TEXT, ")
-                    .append(Records.COLUMN_LECTURER).append(" TEXT")
+                    .append(Records.COLUMN_LECTURER).append(" TEXT, ")
+                    .append(Records.COLUMN_RECORD_TYPE).append(" INTEGER")
                     .append(");");
             db.execSQL(queryBuilder.toString());
         }

@@ -27,13 +27,15 @@ public class ScheduleUpdater {
                 })
                 .subscribeOn(Schedulers.io())
                 .map(schedule -> {
-                    Schedule oldSchedule = storager.restore();
+                    Schedule oldSchedule = storager.restoreSchedule();
                     ScheduleComparator cmp = new ScheduleComparator();
                     boolean equals = cmp.compare(oldSchedule, schedule);
                     env.deletedRecords = cmp.getDeletedRecords();
                     env.addedRecords = cmp.getAddedRecords();
                     if (!equals) {
-                        storager.store(schedule);
+                        storager.storeSchedule(schedule);
+                        storager.storeAddedRecords(env.addedRecords);
+                        storager.storeDeletedRecords(env.deletedRecords);
                     }
                     return schedule;
                 });

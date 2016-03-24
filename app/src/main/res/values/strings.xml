@@ -14,5 +14,6 @@
     <string name="url_is_empty">URL is empty</string>
 
     <string name="on_schedule_changed_notification">Schedule had been changed</string>
+    <string name="on_schedule_no_changes_notification">No changes</string>
     <string name="on_boot_notification">Schedule autoupdater has been started</string>
 </resources>

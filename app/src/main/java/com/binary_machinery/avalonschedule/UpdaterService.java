@@ -22,7 +22,6 @@ public class UpdaterService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        createNotification();
         GlobalEnvironment env = GlobalEnvironment.getInstance();
         if (env.dbProvider == null) {
             env.dbProvider = new DbProvider(this);
@@ -39,8 +38,15 @@ public class UpdaterService extends Service {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             schedule -> {
+                                if (env.addedRecords.size() != 0 || env.deletedRecords.size() != 0) {
+                                    createNotification(getString(R.string.on_schedule_changed_notification));
+                                    SharedPreferences.Editor editor = prefs.edit();
+                                    editor.putBoolean(Constants.PREF_SCHEDULE_CHANGED, true);
+                                } else {
+                                    createNotification(getString(R.string.on_schedule_no_changes_notification));
+                                }
                             },
-                            throwable -> Toast.makeText(this, R.string.task_loading_failed, Toast.LENGTH_SHORT).show()
+                            throwable -> createNotification(getString(R.string.task_loading_failed))
                     );
         }
         return super.onStartCommand(intent, flags, startId);
@@ -51,12 +57,12 @@ public class UpdaterService extends Service {
         return null;
     }
 
-    private void createNotification() {
+    private void createNotification(String text) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setAutoCancel(true);
         builder.setContentTitle(getString(R.string.app_name));
-        builder.setContentText(Calendar.getInstance().getTime().toString());
+        builder.setContentText(Calendar.getInstance().getTime().toString() + ": " + text);
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify((int) Calendar.getInstance().getTimeInMillis(), builder.build());
