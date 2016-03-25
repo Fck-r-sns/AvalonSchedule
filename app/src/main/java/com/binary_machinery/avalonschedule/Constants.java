@@ -16,5 +16,5 @@ public class Constants {
     public static final String PREF_IS_SERVICE_ENABLED = "service_enabled";
     public static final String PREF_SCHEDULE_CHANGED = "schedule_changed";
 
-    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
+    public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yy");
 }

@@ -36,7 +36,7 @@ public class ScheduleParser {
 
     private static ScheduleRecord parseRecord(Element element) {
         ScheduleRecord record = new ScheduleRecord();
-        SimpleDateFormat dateFormat = Constants.dateFormat;
+        SimpleDateFormat dateFormat = Constants.DATE_FORMAT;
         Elements columns = element.getElementsByTag("td");
         try {
             record.id = Integer.parseInt(columns.get(ScheduleColumn.Id.ordinal()).text());
