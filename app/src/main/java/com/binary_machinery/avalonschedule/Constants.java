@@ -1,5 +1,7 @@
 package com.binary_machinery.avalonschedule;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by fckrsns on 19.03.2016.
  */
@@ -13,4 +15,6 @@ public class Constants {
     public static final String PREF_URL = "url";
     public static final String PREF_IS_SERVICE_ENABLED = "service_enabled";
     public static final String PREF_SCHEDULE_CHANGED = "schedule_changed";
+
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
 }

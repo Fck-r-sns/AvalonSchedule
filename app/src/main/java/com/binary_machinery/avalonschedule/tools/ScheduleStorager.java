@@ -9,6 +9,7 @@ import com.binary_machinery.avalonschedule.data.ScheduleMetadata;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,7 +38,6 @@ public class ScheduleStorager {
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            // TODO: show toast
         }
     }
 
@@ -101,7 +101,6 @@ public class ScheduleStorager {
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            // TODO: show toast
         }
     }
 
@@ -109,7 +108,7 @@ public class ScheduleStorager {
         for (ScheduleRecord record : records) {
             ContentValues cv = new ContentValues();
             cv.put(DbProvider.Records.COLUMN_RECORD_ID, record.id);
-            cv.put(DbProvider.Records.COLUMN_DATE, record.date);
+            cv.put(DbProvider.Records.COLUMN_DATE, record.date.getTime());
             cv.put(DbProvider.Records.COLUMN_WEEKDAY, record.weekday);
             cv.put(DbProvider.Records.COLUMN_TIME, record.time);
             cv.put(DbProvider.Records.COLUMN_TYPE, record.type);
@@ -165,7 +164,7 @@ public class ScheduleStorager {
                 do {
                     ScheduleRecord r = new ScheduleRecord();
                     r.id = cursor.getInt(idIdx);
-                    r.date = cursor.getString(dateIdx);
+                    r.date = new Date(cursor.getLong(dateIdx));
                     r.weekday = cursor.getString(weekdayIdx);
                     r.time = cursor.getString(timeIdx);
                     r.type = cursor.getString(typeIdx);

@@ -9,7 +9,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
@@ -33,6 +36,7 @@ public class ScheduleParser {
 
     private static ScheduleRecord parseRecord(Element element) {
         ScheduleRecord record = new ScheduleRecord();
+        SimpleDateFormat dateFormat = Constants.dateFormat;
         Elements columns = element.getElementsByTag("td");
         try {
             record.id = Integer.parseInt(columns.get(ScheduleColumn.Id.ordinal()).text());
@@ -43,11 +47,15 @@ public class ScheduleParser {
 
         String dateString = element.getElementsByTag("th").text(); // date and weekday use header tag instead of normal row
         if (dateString.isEmpty()) {
-            record.date = Constants.PARSING_ERROR;
+            record.date = new Date();
             record.weekday = Constants.PARSING_ERROR;
         } else {
             String[] dateStringSplit = dateString.split(" ");
-            record.date = dateStringSplit[0];
+            try {
+                record.date = dateFormat.parse(dateStringSplit[0]);
+            } catch (ParseException e) {
+                record.date = new Date();
+            }
             record.weekday = dateStringSplit[1];
         }
 

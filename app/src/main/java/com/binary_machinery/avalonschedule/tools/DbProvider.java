@@ -49,7 +49,7 @@ public class DbProvider extends SQLiteOpenHelper {
             queryBuilder.append("CREATE TABLE ").append(Records.TABLE_NAME).append(" (")
                     .append(Records.COLUMN_ROW_ID).append(" INTEGER, ")
                     .append(Records.COLUMN_RECORD_ID).append(" INTEGER, ")
-                    .append(Records.COLUMN_DATE).append(" TEXT, ")
+                    .append(Records.COLUMN_DATE).append(" INTEGER, ")
                     .append(Records.COLUMN_WEEKDAY).append(" TEXT, ")
                     .append(Records.COLUMN_TIME).append(" TEXT, ")
                     .append(Records.COLUMN_TYPE).append(" TEXT, ")
