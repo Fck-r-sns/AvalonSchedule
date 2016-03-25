@@ -52,6 +52,7 @@ public class SettingsActivity extends AppCompatActivity {
                     Constants.UPDATE_INTERVAL,
                     pendingIntent
             );
+            Toast.makeText(this, R.string.service_started, Toast.LENGTH_SHORT).show();
         });
 
         Button stopServiceButton = (Button) findViewById(R.id.stop_service_button);
@@ -59,6 +60,7 @@ public class SettingsActivity extends AppCompatActivity {
             prefEditor.putBoolean(Constants.PREF_IS_SERVICE_ENABLED, false);
             prefEditor.apply();
             am.cancel(pendingIntent);
+            Toast.makeText(this, R.string.service_stopped, Toast.LENGTH_SHORT).show();
         });
     }
 
