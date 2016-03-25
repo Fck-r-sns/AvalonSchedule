@@ -2,6 +2,7 @@
     <string name="app_name">Avalon schedule</string>
     <string name="settings_activity_title">Settings</string>
     <string name="changes_activity_title">Changes</string>
+    <string name="about_activity_title">About</string>
 
     <string name="menu_go_to_nearest_course">Go to nearest course</string>
     <string name="menu_update">Update</string>
@@ -27,4 +28,13 @@
 
     <string name="deleted_records_caption">Deleted records</string>
     <string name="added_records_caption">Added records</string>
+
+    <string name="about_author_caption">Author:</string>
+    <string name="about_author">Prikhodko Evgeny</string>
+    <string name="about_email_caption">Email:</string>
+    <string name="about_email">fck.r.sns@gmail.com</string>
+    <string name="about_source_code_caption">Source code:</string>
+    <string name="about_source_code">https://github.com/Fck-r-sns/AvalonSchedule</string>
+    <string name="about_icon">Icon by Paresh D (https://www.iconfinder.com/pareshdhake)</string>
+
 </resources>

@@ -110,7 +110,8 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void showAbout() {
-        // TODO: implement
+        Intent settingsIntent = new Intent(this, AboutActivity.class);
+        startActivity(settingsIntent);
     }
 
     private void printScheduleRecords(List<ScheduleRecord> records) {
