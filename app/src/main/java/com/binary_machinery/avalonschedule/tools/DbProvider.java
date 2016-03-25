@@ -20,7 +20,8 @@ public class DbProvider extends SQLiteOpenHelper {
 
     public static class Records {
         public static final String TABLE_NAME = "records";
-        public static final String COLUMN_ID = "_id";
+        public static final String COLUMN_ROW_ID = "_id";
+        public static final String COLUMN_RECORD_ID = "record_id";
         public static final String COLUMN_DATE = "date";
         public static final String COLUMN_WEEKDAY = "weekday";
         public static final String COLUMN_TIME = "time";
@@ -46,7 +47,8 @@ public class DbProvider extends SQLiteOpenHelper {
         {
             StringBuilder queryBuilder = new StringBuilder();
             queryBuilder.append("CREATE TABLE ").append(Records.TABLE_NAME).append(" (")
-                    .append(Records.COLUMN_ID).append(" INTEGER PRIMARY KEY, ")
+                    .append(Records.COLUMN_ROW_ID).append(" INTEGER, ")
+                    .append(Records.COLUMN_RECORD_ID).append(" INTEGER, ")
                     .append(Records.COLUMN_DATE).append(" TEXT, ")
                     .append(Records.COLUMN_WEEKDAY).append(" TEXT, ")
                     .append(Records.COLUMN_TIME).append(" TEXT, ")
@@ -54,7 +56,11 @@ public class DbProvider extends SQLiteOpenHelper {
                     .append(Records.COLUMN_COURSE).append(" TEXT, ")
                     .append(Records.COLUMN_ROOM).append(" TEXT, ")
                     .append(Records.COLUMN_LECTURER).append(" TEXT, ")
-                    .append(Records.COLUMN_RECORD_TYPE).append(" INTEGER")
+                    .append(Records.COLUMN_RECORD_TYPE).append(" INTEGER, ")
+                    .append("PRIMARY KEY (")
+                    .append(Records.COLUMN_ROW_ID).append(", ")
+                    .append(Records.COLUMN_RECORD_TYPE)
+                    .append(")")
                     .append(");");
             db.execSQL(queryBuilder.toString());
         }

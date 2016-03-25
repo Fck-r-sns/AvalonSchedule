@@ -108,7 +108,7 @@ public class ScheduleStorager {
     private static void storeRecords(List<ScheduleRecord> records, DbProvider.Records.Type type, SQLiteDatabase db) {
         for (ScheduleRecord record : records) {
             ContentValues cv = new ContentValues();
-            cv.put(DbProvider.Records.COLUMN_ID, record.id);
+            cv.put(DbProvider.Records.COLUMN_RECORD_ID, record.id);
             cv.put(DbProvider.Records.COLUMN_DATE, record.date);
             cv.put(DbProvider.Records.COLUMN_WEEKDAY, record.weekday);
             cv.put(DbProvider.Records.COLUMN_TIME, record.time);
@@ -149,10 +149,10 @@ public class ScheduleStorager {
 
     private static List<ScheduleRecord> restoreRecords(DbProvider.Records.Type type, SQLiteDatabase db) {
         String whereClause = DbProvider.Records.COLUMN_RECORD_TYPE + "=" + type.ordinal();
-        Cursor cursor = db.query(DbProvider.Records.TABLE_NAME, null, whereClause, null, null, null, DbProvider.Records.COLUMN_ID);
+        Cursor cursor = db.query(DbProvider.Records.TABLE_NAME, null, whereClause, null, null, null, DbProvider.Records.COLUMN_RECORD_ID);
         try {
             if (cursor.moveToFirst()) {
-                int idIdx = cursor.getColumnIndex(DbProvider.Records.COLUMN_ID);
+                int idIdx = cursor.getColumnIndex(DbProvider.Records.COLUMN_RECORD_ID);
                 int dateIdx = cursor.getColumnIndex(DbProvider.Records.COLUMN_DATE);
                 int weekdayIdx = cursor.getColumnIndex(DbProvider.Records.COLUMN_WEEKDAY);
                 int timeIdx = cursor.getColumnIndex(DbProvider.Records.COLUMN_TIME);
