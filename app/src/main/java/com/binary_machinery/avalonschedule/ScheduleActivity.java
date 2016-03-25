@@ -38,7 +38,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.schedule_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -48,8 +48,8 @@ public class ScheduleActivity extends AppCompatActivity {
             case R.id.menu_update:
                 updateSchedule();
                 break;
-            case R.id.menu_test_update:
-                testUpdateSchedule();
+            case R.id.menu_changes:
+                showChanges();
                 break;
             case R.id.menu_settings:
                 showSettings();
@@ -88,7 +88,9 @@ public class ScheduleActivity extends AppCompatActivity {
                 );
     }
 
-    private void testUpdateSchedule() {
+    private void showChanges() {
+        Intent settingsIntent = new Intent(this, ChangesActivity.class);
+        startActivity(settingsIntent);
     }
 
     private void showSettings() {
@@ -102,7 +104,7 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void printScheduleRecords(List<ScheduleRecord> records) {
         ListView list = (ListView) findViewById(R.id.scheduleList);
-        ListAdapter adapter = new ArrayAdapter<ScheduleRecord>(ScheduleActivity.this, android.R.layout.simple_list_item_1, records);
+        ListAdapter adapter = new ArrayAdapter<ScheduleRecord>(this, android.R.layout.simple_list_item_1, records);
         list.setAdapter(adapter);
     }
 }

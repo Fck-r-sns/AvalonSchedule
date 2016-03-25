@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/deletedFragmentLayout"
+        android:layout_width="match_parent"
+        android:layout_weight="0.5"
+        android:layout_height="0dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/addedFragmentLayout"
+        android:layout_width="match_parent"
+        android:layout_weight="0.5"
+        android:layout_height="0dp"/>
+
+</LinearLayout>

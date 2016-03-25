@@ -39,6 +39,11 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".ChangesActivity"
+            android:label="@string/changes_activity_title"
+            android:parentActivityName=".ScheduleActivity" />
     </application>
 
 </manifest>

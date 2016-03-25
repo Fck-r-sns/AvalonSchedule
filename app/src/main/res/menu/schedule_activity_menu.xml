@@ -4,8 +4,8 @@
         android:id="@+id/menu_update"
         android:title="@string/menu_update" />
     <item
-        android:id="@+id/menu_test_update"
-        android:title="@string/menu_update" />
+        android:id="@+id/menu_changes"
+        android:title="@string/menu_changes" />
     <item
         android:id="@+id/menu_settings"
         android:title="@string/menu_settings" />

@@ -34,8 +34,8 @@ public class ScheduleUpdater {
                     env.addedRecords = cmp.getAddedRecords();
                     if (!equals) {
                         storager.storeSchedule(schedule);
-                        storager.storeAddedRecords(env.addedRecords);
                         storager.storeDeletedRecords(env.deletedRecords);
+                        storager.storeAddedRecords(env.addedRecords);
                     }
                     return schedule;
                 });
