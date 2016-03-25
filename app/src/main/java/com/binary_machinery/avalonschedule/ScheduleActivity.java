@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,12 +17,15 @@ import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleStorager;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
 
+import java.util.Calendar;
 import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
 public class ScheduleActivity extends AppCompatActivity {
+
+    int m_nearestCoursePosition = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class ScheduleActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menu_go_to_nearest_course:
+                scrollToNearestCourse();
+                break;
             case R.id.menu_update:
                 updateSchedule();
                 break;
@@ -68,7 +73,13 @@ public class ScheduleActivity extends AppCompatActivity {
         ScheduleStorager storager = new ScheduleStorager(dbProvider);
         Schedule schedule = storager.restoreSchedule();
         List<ScheduleRecord> records = schedule.getRecords();
+        m_nearestCoursePosition = findNearestCourse(records);
         printScheduleRecords(records);
+    }
+
+    private void scrollToNearestCourse() {
+        ListView list = (ListView) findViewById(R.id.scheduleList);
+        list.smoothScrollToPosition(m_nearestCoursePosition);
     }
 
     private void updateSchedule() {
@@ -104,7 +115,16 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private void printScheduleRecords(List<ScheduleRecord> records) {
         ListView list = (ListView) findViewById(R.id.scheduleList);
-        ListAdapter adapter = new ArrayAdapter<ScheduleRecord>(this, android.R.layout.simple_list_item_1, records);
+        ListAdapter adapter = new RecordsListAdapter(this, records, m_nearestCoursePosition);
         list.setAdapter(adapter);
+    }
+
+    private static int findNearestCourse(List<ScheduleRecord> records) {
+        int nearestCoursePosition = 0;
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+        while (records.get(nearestCoursePosition).date.getTime() < currentTime) {
+            ++nearestCoursePosition;
+        }
+        return nearestCoursePosition;
     }
 }

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="lineSeparatorColor">#000000</color>>
+    <color name="colorNearestCourse">#BCE2BF</color>
+    <color name="colorTransparent">#00000000</color>>
 </resources>

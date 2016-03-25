@@ -20,7 +20,7 @@ public class ScheduleRecord {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(id).append(": ").append(Constants.DATE_FORMAT.format(date)).append(" ").append(weekday).append(" ").append(time).append('\n')
+        builder.append(Constants.DATE_FORMAT.format(date)).append(" ").append(weekday).append(" ").append(time).append('\n')
                 .append(type).append(", ").append(room).append('\n')
                 .append(course).append('\n')
                 .append(lecturer);
