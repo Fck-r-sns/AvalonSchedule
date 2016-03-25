@@ -37,9 +37,9 @@ public class ChangesActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         m_deletedRecordsFragment = new DeletedRecordsFragment();
-        fragmentTransaction.add(R.id.deletedFragmentLayout, m_deletedRecordsFragment);
+        fragmentTransaction.replace(R.id.deletedFragmentLayout, m_deletedRecordsFragment);
         m_addedRecordsFragment = new AddedRecordsFragment();
-        fragmentTransaction.add(R.id.addedFragmentLayout, m_addedRecordsFragment);
+        fragmentTransaction.replace(R.id.addedFragmentLayout, m_addedRecordsFragment);
         fragmentTransaction.commit();
     }
 
