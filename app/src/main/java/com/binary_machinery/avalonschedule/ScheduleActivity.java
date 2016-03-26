@@ -92,6 +92,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 .subscribe(
                         schedule -> {
                             List<ScheduleRecord> records = schedule.getRecords();
+                            m_nearestCoursePosition = findNearestCourse(records);
                             printScheduleRecords(records);
                         },
                         throwable -> Toast.makeText(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage(), Toast.LENGTH_SHORT).show(),
