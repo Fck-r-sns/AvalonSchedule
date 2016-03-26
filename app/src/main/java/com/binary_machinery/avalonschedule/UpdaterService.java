@@ -1,6 +1,7 @@
 package com.binary_machinery.avalonschedule;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import rx.Observable;
@@ -46,7 +48,7 @@ public class UpdaterService extends Service {
                                     createNotification(getString(R.string.on_schedule_no_changes_notification));
                                 }
                             },
-                            throwable -> createNotification(getString(R.string.task_loading_failed))
+                            throwable -> createNotification(throwable.getMessage())
                     );
         }
         return super.onStartCommand(intent, flags, startId);
@@ -62,7 +64,13 @@ public class UpdaterService extends Service {
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setAutoCancel(true);
         builder.setContentTitle(getString(R.string.app_name));
-        builder.setContentText(Calendar.getInstance().getTime().toString() + ": " + text);
+        SimpleDateFormat formater = new SimpleDateFormat("hh:mm");
+        String timeString = formater.format(Calendar.getInstance().getTime());
+        builder.setContentText(timeString + ": " + text);
+
+        Intent intent = new Intent(this, ChangesActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
 
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify((int) Calendar.getInstance().getTimeInMillis(), builder.build());
