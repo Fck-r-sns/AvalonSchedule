@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="Start"
+        android:text="@string/start_button_text"
         android:layout_below="@+id/textView3" />
 
     <Button
@@ -31,7 +31,7 @@
         android:layout_alignBottom="@+id/start_service_button"
         android:layout_toEndOf="@+id/start_service_button"
         android:layout_toRightOf="@+id/start_service_button"
-        android:text="Stop" />
+        android:text="@string/stop_button_text" />
 
     <TextView
         android:id="@+id/textView2"
@@ -40,17 +40,19 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/view"
-        android:text="URL"
+        android:text="@string/url_caption"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
         android:id="@+id/url_input"
+        android:inputType="textUri"
+        android:autoLink="web"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:text="http://..." />
+        android:text="@string/url_input_invitation" />
 
     <TextView
         android:id="@+id/textView3"
@@ -59,7 +61,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/view2"
-        android:text="Autoupdate every two hours"
+        android:text="@string/autoupdate_service_caption"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <View
@@ -81,7 +83,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save_button_text"
         android:id="@+id/save_url_button"
         android:layout_below="@+id/url_input"
         android:layout_toLeftOf="@+id/stop_service_button"

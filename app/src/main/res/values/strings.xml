@@ -16,9 +16,16 @@
     <string name="task_loading_finished">Loading has been finished</string>
     <string name="task_loading_failed">Loading has been failed</string>
 
+    <string name="start_button_text">Start</string>
+    <string name="stop_button_text">Stop</string>
+    <string name="save_button_text">Save</string>
+
+    <string name="url_caption">URL</string>
+    <string name="url_input_invitation">http://...</string>
     <string name="url_saved">URL saved</string>
     <string name="url_is_empty">URL is empty</string>
 
+    <string name="autoupdate_service_caption">Autoupdate every hour</string>
     <string name="service_started">Service started</string>
     <string name="service_stopped">Service stopped</string>
 

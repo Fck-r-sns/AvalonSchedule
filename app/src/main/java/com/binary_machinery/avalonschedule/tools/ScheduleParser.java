@@ -29,7 +29,7 @@ public class ScheduleParser {
                 .map(doc -> doc.select(".schedule").get(0))
                 .map(table -> table.getElementsByTag("tr"))
                 .concatMap(elements -> Observable.from(elements.subList(0, elements.size())))
-                .skip(1)
+                .skip(1) // skip table header
                 .map(ScheduleParser::parseRecord)
                 .collect(() -> new ArrayList<ScheduleRecord>(64), List::add);
     }

@@ -103,7 +103,9 @@ public class ScheduleActivity extends AppCompatActivity {
                             m_nearestCoursePosition = findNearestCourse(records);
                             printScheduleRecords(records);
                         },
-                        throwable -> Utils.showToast(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage()),
+                        throwable -> {
+                            Utils.showMessageDialog(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage());
+                        },
                         () -> Utils.showToast(this, R.string.task_loading_finished)
                 );
     }

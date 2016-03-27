@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
  */
 public class Constants {
     public static final String PARSING_ERROR = "Parsing error";
-    public static final int UPDATE_INTERVAL = 2 * 60 * 60 * 1000; // two hours
+    public static final int UPDATE_INTERVAL = 60 * 60 * 1000; // one hour
 //public static final int UPDATE_INTERVAL = 60 * 1000;
 
     // shared preferences

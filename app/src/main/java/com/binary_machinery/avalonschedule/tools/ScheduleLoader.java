@@ -21,7 +21,7 @@ public class ScheduleLoader {
                     try {
                         result = Jsoup.connect(url).get();
                     } catch (IOException e) {
-                        result = null;
+                        throw new RuntimeException(e.getMessage()); // rethrow unchecked
                     }
                     return result;
                 });
