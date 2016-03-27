@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
             prefEditor.apply();
             am.setInexactRepeating(
                     AlarmManager.RTC,
-                    System.currentTimeMillis() + Constants.UPDATE_INTERVAL,
+                    System.currentTimeMillis(),
                     Constants.UPDATE_INTERVAL,
                     pendingIntent
             );

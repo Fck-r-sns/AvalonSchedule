@@ -130,10 +130,11 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private static int findNearestCourse(List<ScheduleRecord> records) {
+        final long DAY_IN_MILLIS = 24 * 60 * 60 * 1000;
         int nearestCoursePosition = 0;
         if (!records.isEmpty()) {
             long currentTime = Calendar.getInstance().getTimeInMillis();
-            while (records.get(nearestCoursePosition).date.getTime() < currentTime) {
+            while (records.get(nearestCoursePosition).date.getTime() + DAY_IN_MILLIS < currentTime) {
                 ++nearestCoursePosition;
             }
         }
