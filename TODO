@@ -1,0 +1,4 @@
+TODO: translate to russian
+TODO: fix bug with wrong nearest course search
+TODO: fix bug with restart updateservice on app run
+TODO: show full message in dialog on error notification click
