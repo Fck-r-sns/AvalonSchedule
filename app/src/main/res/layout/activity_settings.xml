@@ -45,8 +45,6 @@
 
     <EditText
         android:id="@+id/url_input"
-        android:inputType="textUri"
-        android:autoLink="web"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
