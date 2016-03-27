@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 
-import java.text.ParseException;
-import java.util.Date;
 import java.util.List;
 
 /**

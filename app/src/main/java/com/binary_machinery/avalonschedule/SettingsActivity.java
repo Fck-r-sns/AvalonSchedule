@@ -6,11 +6,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import com.binary_machinery.avalonschedule.utils.Utils;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
             String newUrl = urlInput.getText().toString();
             prefEditor.putString(Constants.PREF_URL, newUrl);
             prefEditor.apply();
-            Toast.makeText(this, R.string.url_saved, Toast.LENGTH_SHORT).show();
+            Utils.showToast(this, R.string.url_saved);
         });
 
         final Intent serviceLaunchIntent = new Intent(SettingsActivity.this, UpdaterService.class);
@@ -53,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
                     Constants.UPDATE_INTERVAL,
                     pendingIntent
             );
-            Toast.makeText(this, R.string.service_started, Toast.LENGTH_SHORT).show();
+            Utils.showToast(this, R.string.service_started);
         });
 
         Button stopServiceButton = (Button) findViewById(R.id.stop_service_button);
@@ -61,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
             prefEditor.putBoolean(Constants.PREF_IS_SERVICE_ENABLED, false);
             prefEditor.apply();
             am.cancel(pendingIntent);
-            Toast.makeText(this, R.string.service_stopped, Toast.LENGTH_SHORT).show();
+            Utils.showToast(this, R.string.service_stopped);
         });
     }
 

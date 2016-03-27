@@ -2,13 +2,12 @@ package com.binary_machinery.avalonschedule;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.data.Schedule;
@@ -16,6 +15,7 @@ import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleStorager;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
+import com.binary_machinery.avalonschedule.utils.Utils;
 
 import java.util.Calendar;
 import java.util.List;
@@ -36,6 +36,14 @@ public class ScheduleActivity extends AppCompatActivity {
             env.dbProvider = new DbProvider(this);
         }
         restoreScheduleFromDb();
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            String message = intent.getStringExtra(Constants.MESSAGE_EXTRA);
+            if (message != null) {
+                Utils.showMessageDialog(this, message);
+            }
+        }
     }
 
     @Override
@@ -85,7 +93,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private void updateSchedule() {
         SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
         String sourceUrl = prefs.getString(Constants.PREF_URL, "");
-        Toast.makeText(this, R.string.task_loading_in_process, Toast.LENGTH_SHORT).show();
+        Utils.showToast(this, R.string.task_loading_in_process);
         Observable.just(sourceUrl)
                 .concatMap(ScheduleUpdater::get)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -95,8 +103,8 @@ public class ScheduleActivity extends AppCompatActivity {
                             m_nearestCoursePosition = findNearestCourse(records);
                             printScheduleRecords(records);
                         },
-                        throwable -> Toast.makeText(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage(), Toast.LENGTH_SHORT).show(),
-                        () -> Toast.makeText(this, R.string.task_loading_finished, Toast.LENGTH_SHORT).show()
+                        throwable -> Utils.showToast(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage()),
+                        () -> Utils.showToast(this, R.string.task_loading_finished)
                 );
     }
 

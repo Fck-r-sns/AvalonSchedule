@@ -44,7 +44,6 @@
             android:name=".ChangesActivity"
             android:label="@string/changes_activity_title"
             android:parentActivityName=".ScheduleActivity" />
-
         <activity
             android:name=".AboutActivity"
             android:label="@string/about_activity_title"

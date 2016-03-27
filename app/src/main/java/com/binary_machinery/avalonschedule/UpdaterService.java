@@ -1,21 +1,15 @@
 package com.binary_machinery.avalonschedule;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.support.v7.app.NotificationCompat;
-import android.widget.Toast;
 
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import com.binary_machinery.avalonschedule.utils.Utils;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -33,7 +27,7 @@ public class UpdaterService extends Service {
         String sourceUrl = prefs.getString(Constants.PREF_URL, "");
 
         if (sourceUrl.isEmpty()) {
-            Toast.makeText(this, R.string.task_loading_failed, Toast.LENGTH_SHORT).show();
+            Utils.showToast(this, R.string.task_loading_failed);
         } else {
             Observable.just(sourceUrl)
                     .concatMap(ScheduleUpdater::get)
@@ -41,14 +35,21 @@ public class UpdaterService extends Service {
                     .subscribe(
                             schedule -> {
                                 if (env.addedRecords.size() != 0 || env.deletedRecords.size() != 0) {
-                                    createNotification(getString(R.string.on_schedule_changed_notification));
                                     SharedPreferences.Editor editor = prefs.edit();
                                     editor.putBoolean(Constants.PREF_SCHEDULE_CHANGED, true);
+                                    Intent changesIntent = new Intent(this, ChangesActivity.class);
+                                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, changesIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    Utils.showNotification(this, getString(R.string.on_schedule_changed_notification), pendingIntent);
                                 } else {
-                                    createNotification(getString(R.string.on_schedule_no_changes_notification));
+                                    Utils.showNotification(this, getString(R.string.on_schedule_no_changes_notification), null);
                                 }
                             },
-                            throwable -> createNotification(throwable.getMessage())
+                            throwable -> {
+                                Intent messageIntent = new Intent(this, ScheduleActivity.class);
+                                messageIntent.putExtra(Constants.MESSAGE_EXTRA, throwable.getMessage());
+                                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, messageIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                Utils.showNotification(this, throwable.getMessage(), pendingIntent);
+                            }
                     );
         }
         return super.onStartCommand(intent, flags, startId);
@@ -57,22 +58,5 @@ public class UpdaterService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
-    }
-
-    private void createNotification(String text) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
-        builder.setAutoCancel(true);
-        builder.setContentTitle(getString(R.string.app_name));
-        SimpleDateFormat formater = new SimpleDateFormat("hh:mm");
-        String timeString = formater.format(Calendar.getInstance().getTime());
-        builder.setContentText(timeString + ": " + text);
-
-        Intent intent = new Intent(this, ChangesActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
-
-        NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify((int) Calendar.getInstance().getTimeInMillis(), builder.build());
     }
 }

@@ -17,4 +17,6 @@ public class Constants {
     public static final String PREF_SCHEDULE_CHANGED = "schedule_changed";
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yy");
+
+    public static final String MESSAGE_EXTRA = "message";
 }
