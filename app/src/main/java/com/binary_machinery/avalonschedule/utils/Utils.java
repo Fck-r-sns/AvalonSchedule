@@ -27,7 +27,7 @@ public class Utils {
 
     public static void showNotification(Context context, String message, PendingIntent intent) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.drawable.icon);
         builder.setAutoCancel(true);
         builder.setContentTitle(context.getString(R.string.app_name));
         SimpleDateFormat formater = new SimpleDateFormat("hh:mm");

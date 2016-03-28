@@ -28,7 +28,7 @@
         <service
             android:name=".UpdaterService"
             android:enabled="true"
-            android:exported="true"
+            android:exported="false"
             android:process=":serviceProcess" />
 
         <receiver
