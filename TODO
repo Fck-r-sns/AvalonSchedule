@@ -1,3 +1,4 @@
 TODO: translate to russian
 TODO: fix bug with restart updateservice on app close
 TODO: redesign schedule - show one week per page
+TODO: fix: notification with throwable shows null in some cases
