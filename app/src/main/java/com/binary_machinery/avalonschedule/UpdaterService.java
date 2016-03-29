@@ -46,10 +46,10 @@ public class UpdaterService extends Service {
                             },
                             throwable -> {
                                 StackTraceElement[] stack = throwable.getStackTrace();
-                                String stackString = null;
+                                String stackString = throwable.getMessage() + "\n";
+                                stackString += throwable.toString() + "\n";
                                 for (StackTraceElement e : stack) {
-                                    stackString += e.toString();
-                                    stackString += "\n";
+                                    stackString += e.toString() + "\n";
                                 }
                                 Intent messageIntent = new Intent(this, ScheduleActivity.class);
 //                                messageIntent.putExtra(Constants.MESSAGE_EXTRA, throwable.getMessage());

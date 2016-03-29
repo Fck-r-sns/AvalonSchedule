@@ -17,13 +17,11 @@ public class ScheduleLoader {
         return Observable.just(sourceUrl)
                 .subscribeOn(Schedulers.io())
                 .map(url -> {
-                    Document result = null;
                     try {
-                        result = Jsoup.connect(url).get();
+                        return Jsoup.connect(url).get();
                     } catch (IOException e) {
-                        throw new RuntimeException(e.getMessage()); // rethrow unchecked
+                        throw new RuntimeException(e); // rethrow unchecked
                     }
-                    return result;
                 });
     }
 }
