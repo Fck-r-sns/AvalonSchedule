@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonschedule;
+package com.binary_machinery.avalonschedule.view;
 
 import android.app.ActionBar;
 import android.app.FragmentManager;
@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleStorager;

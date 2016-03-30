@@ -1,6 +1,6 @@
 package com.binary_machinery.avalonschedule.tools;
 
-import com.binary_machinery.avalonschedule.Constants;
+import com.binary_machinery.avalonschedule.utils.Constants;
 import com.binary_machinery.avalonschedule.data.ScheduleColumn;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 

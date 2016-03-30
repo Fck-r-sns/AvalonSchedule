@@ -1,13 +1,16 @@
 package com.binary_machinery.avalonschedule.data;
 
-import com.binary_machinery.avalonschedule.Constants;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.binary_machinery.avalonschedule.utils.Constants;
 
 import java.util.Date;
 
 /**
  * Created by fckrsns on 12.03.2016.
  */
-public class ScheduleRecord {
+public class ScheduleRecord implements Parcelable {
     public int id;
     public Date date;
     public String weekday;
@@ -62,4 +65,42 @@ public class ScheduleRecord {
         res = COEF * res + lecturer.hashCode();
         return res;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeLong(date.getTime());
+        dest.writeString(weekday);
+        dest.writeString(time);
+        dest.writeString(type);
+        dest.writeString(course);
+        dest.writeString(room);
+        dest.writeString(lecturer);
+    }
+
+    public static final Parcelable.Creator<ScheduleRecord> CREATOR = new Parcelable.Creator<ScheduleRecord>() {
+        @Override
+        public ScheduleRecord createFromParcel(Parcel source) {
+            ScheduleRecord record = new ScheduleRecord();
+            record.id = source.readInt();
+            record.date = new Date(source.readLong());
+            record.weekday = source.readString();
+            record.time = source.readString();
+            record.type = source.readString();
+            record.course = source.readString();
+            record.room = source.readString();
+            record.lecturer = source.readString();
+            return record;
+        }
+
+        @Override
+        public ScheduleRecord[] newArray(int size) {
+            return new ScheduleRecord[size];
+        }
+    };
 }

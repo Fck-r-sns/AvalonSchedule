@@ -1,14 +1,15 @@
-package com.binary_machinery.avalonschedule;
+package com.binary_machinery.avalonschedule.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 
+import com.binary_machinery.avalonschedule.utils.Constants;
+import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.data.Schedule;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
@@ -16,6 +17,7 @@ import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleStorager;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
 import com.binary_machinery.avalonschedule.utils.Utils;
+import com.binary_machinery.avalonschedule.view.schedule.SchedulePagerAdapter;
 
 import java.util.Calendar;
 import java.util.List;
@@ -86,8 +88,7 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void scrollToNearestCourse() {
-        ListView list = (ListView) findViewById(R.id.scheduleList);
-        list.smoothScrollToPosition(m_nearestCoursePosition);
+        // TODO: implement
     }
 
     private void updateSchedule() {
@@ -126,17 +127,16 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void printScheduleRecords(List<ScheduleRecord> records) {
-        ListView list = (ListView) findViewById(R.id.scheduleList);
-        ListAdapter adapter = new RecordsListAdapter(this, records, m_nearestCoursePosition);
-        list.setAdapter(adapter);
+        SchedulePagerAdapter adapter = new SchedulePagerAdapter(this, getSupportFragmentManager(), records);
+        ViewPager pager = (ViewPager) findViewById(R.id.schedulePager);
+        pager.setAdapter(adapter);
     }
 
     private static int findNearestCourse(List<ScheduleRecord> records) {
-        final long DAY_IN_MILLIS = 24 * 60 * 60 * 1000;
         int nearestCoursePosition = 0;
         if (!records.isEmpty()) {
             long currentTime = Calendar.getInstance().getTimeInMillis();
-            while (records.get(nearestCoursePosition).date.getTime() + DAY_IN_MILLIS < currentTime) {
+            while (records.get(nearestCoursePosition).date.getTime() + Constants.DAY_IN_MILLISECONDS < currentTime) {
                 ++nearestCoursePosition;
             }
         }

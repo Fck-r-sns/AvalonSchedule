@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonschedule;
+package com.binary_machinery.avalonschedule.service;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
+import com.binary_machinery.avalonschedule.utils.Constants;
+import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.utils.Utils;
 
 public class OnBootStarter extends BroadcastReceiver {

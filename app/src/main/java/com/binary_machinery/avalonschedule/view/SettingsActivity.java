@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonschedule;
+package com.binary_machinery.avalonschedule.view;
 
 import android.app.ActionBar;
 import android.app.AlarmManager;
@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.binary_machinery.avalonschedule.utils.Constants;
+import com.binary_machinery.avalonschedule.R;
+import com.binary_machinery.avalonschedule.service.UpdaterService;
 import com.binary_machinery.avalonschedule.utils.Utils;
 
 public class SettingsActivity extends AppCompatActivity {

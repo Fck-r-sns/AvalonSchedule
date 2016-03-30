@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonschedule;
+package com.binary_machinery.avalonschedule.service;
 
 import android.app.PendingIntent;
 import android.app.Service;
@@ -6,10 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 
+import com.binary_machinery.avalonschedule.utils.Constants;
+import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
 import com.binary_machinery.avalonschedule.utils.Utils;
+import com.binary_machinery.avalonschedule.view.ChangesActivity;
+import com.binary_machinery.avalonschedule.view.ScheduleActivity;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

@@ -1,4 +1,4 @@
-package com.binary_machinery.avalonschedule;
+package com.binary_machinery.avalonschedule.utils;
 
 import java.text.SimpleDateFormat;
 
@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
  * Created by fckrsns on 19.03.2016.
  */
 public class Constants {
+    public static final long DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+
     public static final String PARSING_ERROR = "Parsing error";
     public static final int UPDATE_INTERVAL = 60 * 60 * 1000; // one hour
 //public static final int UPDATE_INTERVAL = 60 * 1000;
@@ -19,4 +21,14 @@ public class Constants {
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd.MM.yy");
 
     public static final String MESSAGE_EXTRA = "message";
+
+    public static final String[] WEEKDAYS = {
+            "Sunday",
+            "Понедельник",
+            "Вторник",
+            "Среда",
+            "Четверг",
+            "Пятница",
+            "Суббота"
+    };
 }

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ScheduleActivity"
+            android:name=".view.ScheduleActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,18 +21,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingsActivity"
+            android:name=".view.SettingsActivity"
             android:label="@string/settings_activity_title"
-            android:parentActivityName=".ScheduleActivity" />
+            android:parentActivityName=".view.ScheduleActivity" />
 
         <service
-            android:name=".UpdaterService"
+            android:name=".service.UpdaterService"
             android:enabled="true"
             android:exported="false"
             android:process=":serviceProcess" />
 
         <receiver
-            android:name=".OnBootStarter"
+            android:name=".service.OnBootStarter"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -41,13 +41,13 @@
         </receiver>
 
         <activity
-            android:name=".ChangesActivity"
+            android:name=".view.ChangesActivity"
             android:label="@string/changes_activity_title"
-            android:parentActivityName=".ScheduleActivity" />
+            android:parentActivityName=".view.ScheduleActivity" />
         <activity
-            android:name=".AboutActivity"
+            android:name=".view.AboutActivity"
             android:label="@string/about_activity_title"
-            android:parentActivityName=".ScheduleActivity" />
+            android:parentActivityName=".view.ScheduleActivity" />
     </application>
 
 </manifest>
