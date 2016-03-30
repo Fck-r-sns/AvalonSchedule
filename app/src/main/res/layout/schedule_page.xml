@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
     <FrameLayout
         android:id="@+id/layoutMonday"
         android:layout_width="wrap_content"
