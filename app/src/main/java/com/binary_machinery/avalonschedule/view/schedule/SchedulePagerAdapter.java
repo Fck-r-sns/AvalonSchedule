@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonschedule.utils.Constants;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -35,45 +37,20 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        long from = getMonday(position).getTimeInMillis();
-        long to = getSunday(position).getTimeInMillis();
-
-        int firstDayIdx = (!m_records.isEmpty()) ? 0 : Integer.MAX_VALUE;
-        int lastDayIdx = Integer.MIN_VALUE;
-        for (int i = 0; i <= m_records.size(); ++i) {
-            if (i >= m_records.size()) {
-                firstDayIdx = Integer.MAX_VALUE;
-                break;
-            }
-            long time = m_records.get(i).date.getTime();
-            if (time < from) {
-                firstDayIdx = i;
-            } else {
-                break;
-            }
-        }
-        for (int i = firstDayIdx; i < m_records.size(); ++i) {
-            if (i >= m_records.size()) {
-                lastDayIdx = Integer.MIN_VALUE;
-                break;
-            }
-            long time = m_records.get(i).date.getTime();
-            if (time < to) {
-                lastDayIdx = i;
-            } else {
-                break;
-            }
-        }
+        long from = getWeekBeginning(position).getTimeInMillis();
+        long to = getWeekEnd(position).getTimeInMillis();
 
         Map<Integer, ScheduleRecord> recordsByWeekday = new HashMap<>(7);
-        for (int i = firstDayIdx; i <= lastDayIdx; ++i) {
-            ScheduleRecord record = m_records.get(i);
-            Calendar c = Calendar.getInstance();
-            c.setTime(record.date);
-            recordsByWeekday.put(c.get(Calendar.DAY_OF_WEEK), record);
+        for (ScheduleRecord record : m_records) {
+            long time = record.date.getTime();
+            if (from <= time && time <= to) {
+                Calendar c = Calendar.getInstance();
+                c.setTime(record.date);
+                recordsByWeekday.put(c.get(Calendar.DAY_OF_WEEK), record);
+            }
         }
 
-        Calendar calendar = getMonday(position);
+        Calendar calendar = getWeekBeginning(position);
         for (int i = Calendar.SUNDAY; i <= Calendar.SATURDAY; ++i) {
             if (!recordsByWeekday.containsKey(i)) {
                 ScheduleRecord stubRecord = new ScheduleRecord();
@@ -103,25 +80,35 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        Calendar monday = getMonday(position);
-        Calendar sunday = getSunday(position);
+        Calendar monday = getWeekBeginning(position);
+        Calendar sunday = getWeekEnd(position);
         DateFormat formatter = new SimpleDateFormat("dd.MM");
         return formatter.format(monday.getTime()) + " - " + formatter.format(sunday.getTime());
     }
 
-    private Calendar getMonday(int position) {
+    private Calendar getWeekBeginning(int position) {
         Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.setTime(m_minDate);
         calendar.add(Calendar.WEEK_OF_MONTH, position);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
         return calendar;
     }
 
-    private Calendar getSunday(int position) {
+    private Calendar getWeekEnd(int position) {
         Calendar calendar = Calendar.getInstance();
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
         calendar.setTime(m_minDate);
         calendar.add(Calendar.WEEK_OF_MONTH, position);
         calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        calendar.set(Calendar.HOUR, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
         return calendar;
     }
 }

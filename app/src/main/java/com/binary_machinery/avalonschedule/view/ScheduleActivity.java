@@ -20,6 +20,7 @@ import com.binary_machinery.avalonschedule.utils.Utils;
 import com.binary_machinery.avalonschedule.view.schedule.SchedulePagerAdapter;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
@@ -27,7 +28,7 @@ import rx.android.schedulers.AndroidSchedulers;
 
 public class ScheduleActivity extends AppCompatActivity {
 
-    int m_nearestCoursePosition = 0;
+    int m_currentWeekIdx = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class ScheduleActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_go_to_nearest_course:
-                scrollToNearestCourse();
+                scrollToTodayCourse();
                 break;
             case R.id.menu_update:
                 updateSchedule();
@@ -83,13 +84,13 @@ public class ScheduleActivity extends AppCompatActivity {
         ScheduleStorager storager = new ScheduleStorager(dbProvider);
         Schedule schedule = storager.restoreSchedule();
         List<ScheduleRecord> records = schedule.getRecords();
-        m_nearestCoursePosition = findNearestCourse(records);
+        m_currentWeekIdx = findTodayCourse(records);
         printScheduleRecords(records);
     }
 
-    private void scrollToNearestCourse() {
+    private void scrollToTodayCourse() {
         ViewPager pager = (ViewPager) findViewById(R.id.schedulePager);
-        pager.setCurrentItem(4, true);
+        pager.setCurrentItem(m_currentWeekIdx, true);
     }
 
     private void updateSchedule() {
@@ -102,7 +103,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 .subscribe(
                         schedule -> {
                             List<ScheduleRecord> records = schedule.getRecords();
-                            m_nearestCoursePosition = findNearestCourse(records);
+                            m_currentWeekIdx = findTodayCourse(records);
                             printScheduleRecords(records);
                         },
                         throwable -> {
@@ -133,14 +134,14 @@ public class ScheduleActivity extends AppCompatActivity {
         pager.setAdapter(adapter);
     }
 
-    private static int findNearestCourse(List<ScheduleRecord> records) {
-        int nearestCoursePosition = 0;
-        if (!records.isEmpty()) {
-            long currentTime = Calendar.getInstance().getTimeInMillis();
-            while (records.get(nearestCoursePosition).date.getTime() + Constants.DAY_IN_MILLISECONDS < currentTime) {
-                ++nearestCoursePosition;
-            }
+    private static int findTodayCourse(List<ScheduleRecord> records) {
+        if (records.isEmpty()) {
+            return 0;
         }
-        return nearestCoursePosition;
+        Calendar minDateCalendar = Calendar.getInstance();
+        minDateCalendar.setTime(records.get(0).date);
+        minDateCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        Calendar currentTimeCalendar = Calendar.getInstance();
+        return (int)((currentTimeCalendar.getTimeInMillis() - minDateCalendar.getTimeInMillis()) / (7 * Constants.DAY_IN_MILLISECONDS));
     }
 }
