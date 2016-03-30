@@ -39,6 +39,7 @@ public class ScheduleActivity extends AppCompatActivity {
             env.dbProvider = new DbProvider(this);
         }
         restoreScheduleFromDb();
+        scrollToTodayCourse();
 
         Intent intent = getIntent();
         if (intent != null) {
