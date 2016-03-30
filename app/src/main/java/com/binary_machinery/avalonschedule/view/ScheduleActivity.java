@@ -38,7 +38,9 @@ public class ScheduleActivity extends AppCompatActivity {
         if (env.dbProvider == null) {
             env.dbProvider = new DbProvider(this);
         }
-        restoreScheduleFromDb();
+        List<ScheduleRecord> records = restoreScheduleFromDb();
+        m_currentWeekIdx = findTodayCourse(records);
+        printScheduleRecords(records);
         scrollToTodayCourse();
 
         Intent intent = getIntent();
@@ -80,13 +82,11 @@ public class ScheduleActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void restoreScheduleFromDb() {
+    private List<ScheduleRecord> restoreScheduleFromDb() {
         DbProvider dbProvider = GlobalEnvironment.getInstance().dbProvider;
         ScheduleStorager storager = new ScheduleStorager(dbProvider);
         Schedule schedule = storager.restoreSchedule();
-        List<ScheduleRecord> records = schedule.getRecords();
-        m_currentWeekIdx = findTodayCourse(records);
-        printScheduleRecords(records);
+        return schedule.getRecords();
     }
 
     private void scrollToTodayCourse() {
@@ -104,8 +104,9 @@ public class ScheduleActivity extends AppCompatActivity {
                 .subscribe(
                         schedule -> {
                             List<ScheduleRecord> records = schedule.getRecords();
-                            m_currentWeekIdx = findTodayCourse(records);
                             printScheduleRecords(records);
+                            m_currentWeekIdx = findTodayCourse(records);
+                            scrollToTodayCourse();
                         },
                         throwable -> {
                             Utils.showMessageDialog(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage());
