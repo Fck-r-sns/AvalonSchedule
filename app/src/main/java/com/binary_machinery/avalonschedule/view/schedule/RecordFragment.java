@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.binary_machinery.avalonschedule.utils.Constants;
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonschedule.utils.Constants;
 import com.binary_machinery.avalonschedule.utils.Utils;
 
 /**

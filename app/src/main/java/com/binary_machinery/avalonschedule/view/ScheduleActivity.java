@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.binary_machinery.avalonschedule.utils.Constants;
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.data.Schedule;
@@ -16,11 +15,11 @@ import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleStorager;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
+import com.binary_machinery.avalonschedule.utils.Constants;
 import com.binary_machinery.avalonschedule.utils.Utils;
 import com.binary_machinery.avalonschedule.view.schedule.SchedulePagerAdapter;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import rx.Observable;

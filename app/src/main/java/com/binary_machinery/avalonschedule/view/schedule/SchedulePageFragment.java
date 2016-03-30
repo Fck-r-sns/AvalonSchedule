@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
-import com.binary_machinery.avalonschedule.view.schedule.EmptyRecordFragment;
-import com.binary_machinery.avalonschedule.view.schedule.RecordFragment;
 
 import java.util.Calendar;
 

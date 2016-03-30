@@ -8,11 +8,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
-import com.binary_machinery.avalonschedule.utils.Constants;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
