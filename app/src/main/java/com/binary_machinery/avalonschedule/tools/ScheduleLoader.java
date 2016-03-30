@@ -22,6 +22,7 @@ public class ScheduleLoader {
                     } catch (IOException e) {
                         throw new RuntimeException(e); // rethrow unchecked
                     }
-                });
+                })
+                .retry(2);
     }
 }
