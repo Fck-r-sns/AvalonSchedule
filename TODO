@@ -3,3 +3,5 @@ TODO: add license to about and to repository (apache2.0?)
 TODO: remove full exception info from message
 TODO: enable UpdateService by default
 TODO: show UpdateService status in settings (enabled / disabled)
+TODO: check it on emulator with android 4.0+
+TODO: check other TODOs in code
