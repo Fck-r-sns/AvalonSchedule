@@ -20,8 +20,8 @@
     <string name="stop_button_text">Stop</string>
     <string name="save_button_text">Save</string>
 
-    <string name="url_caption">URL</string>
-    <string name="url_input_invitation">http://...</string>
+    <string name="url_caption" translatable="false">URL</string>
+    <string name="url_input_invitation" translatable="false">http://...</string>
     <string name="url_saved">URL saved</string>
     <string name="url_is_empty">URL is empty</string>
 
@@ -38,10 +38,10 @@
 
     <string name="about_author_caption">Author:</string>
     <string name="about_author">Prikhodko Evgeny</string>
-    <string name="about_email_caption">Email:</string>
-    <string name="about_email">binary.machinery@gmail.com</string>
+    <string name="about_email_caption" translatable="false">Email:</string>
+    <string name="about_email" translatable="false">binary.machinery@gmail.com</string>
     <string name="about_source_code_caption">Source code:</string>
-    <string name="about_source_code">https://github.com/Fck-r-sns/AvalonSchedule</string>
+    <string name="about_source_code" translatable="false">https://github.com/Fck-r-sns/AvalonSchedule</string>
     <string name="about_icon">Icon by Paresh D (https://www.iconfinder.com/pareshdhake)</string>
 
     <string name="ok_button_text">OK</string>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Avalon schedule</string>
+    <string name="about_activity_title">О программе</string>
+    <string name="about_author">Приходько Евгений</string>
+    <string name="about_author_caption">Автор:</string>
+    <string name="about_icon">Иконка: Paresh D (https://www.iconfinder.com/pareshdhake)</string>
+    <string name="about_source_code_caption">Исходный код:</string>
+    <string name="added_records_caption">Добавлено</string>
+    <string name="autoupdate_service_caption">Автоматическое обновление каждый час</string>
+    <string name="changes_activity_title">Изменения в расписании</string>
+    <string name="deleted_records_caption">Удалено</string>
+    <string name="menu_about">О программе</string>
+    <string name="menu_changes">Изменения в расписании</string>
+    <string name="menu_clear_changes">Очистить</string>
+    <string name="menu_go_to_today">Сегодня</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="menu_update">Обновить расписание</string>
+    <string name="no_study_today">Нет занятий</string>
+    <string name="ok_button_text">ОК</string>
+    <string name="on_boot_notification">Автообновление расписания запущено</string>
+    <string name="on_schedule_changed_notification">Расписание изменилось</string>
+    <string name="on_schedule_no_changes_notification">Нет изменений</string>
+    <string name="save_button_text">Сохранить</string>
+    <string name="service_started">Сервис запущен</string>
+    <string name="service_stopped">Сервис остановлен</string>
+    <string name="settings_activity_title">Настройки</string>
+    <string name="start_button_text">Запустить</string>
+    <string name="stop_button_text">Остановить</string>
+    <string name="task_loading_failed">Ошибка обновления</string>
+    <string name="task_loading_finished">Загрузка завершена</string>
+    <string name="task_loading_in_process">Загрузка…</string>
+    <string name="url_is_empty">URL пуст</string>
+    <string name="url_saved">URL сохранен</string>
+</resources>
