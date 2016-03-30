@@ -1,3 +1,5 @@
-TODO: translate to russian
 TODO: remove "no changes" notification
 TODO: add license to about and to repository (apache2.0?)
+TODO: remove full exception info from message
+TODO: enable UpdateService by default
+TODO: show UpdateService status in settings (enabled / disabled)
