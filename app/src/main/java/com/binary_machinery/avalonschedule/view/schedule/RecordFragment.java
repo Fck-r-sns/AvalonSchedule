@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.binary_machinery.avalonschedule.utils.Constants;
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonschedule.utils.Utils;
 
 /**
  * Created by fckrsns on 30.03.2016.
@@ -34,7 +35,11 @@ public class RecordFragment extends Fragment {
             setText(view, R.id.record_room, record.room);
             setText(view, R.id.record_course, record.course);
             setText(view, R.id.record_lecturer, record.lecturer);
+
+            int color = Utils.getColorForDate(view, record.date);
+            view.findViewById(R.id.record_root_layout).setBackgroundColor(color);
         }
+
 
         return view;
     }

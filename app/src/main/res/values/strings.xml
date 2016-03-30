@@ -4,7 +4,7 @@
     <string name="changes_activity_title">Changes</string>
     <string name="about_activity_title">About</string>
 
-    <string name="menu_go_to_nearest_course">Go to nearest course</string>
+    <string name="menu_go_to_today">Today</string>
     <string name="menu_update">Update</string>
     <string name="menu_changes">Changes</string>
     <string name="menu_settings">Settings</string>

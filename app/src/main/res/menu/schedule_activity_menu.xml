@@ -3,7 +3,7 @@
     xmlns:compat="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_go_to_nearest_course"
-        android:title="@string/menu_go_to_nearest_course"
+        android:title="@string/menu_go_to_today"
         compat:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_update"

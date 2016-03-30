@@ -88,7 +88,8 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     private void scrollToNearestCourse() {
-        // TODO: implement
+        ViewPager pager = (ViewPager) findViewById(R.id.schedulePager);
+        pager.setCurrentItem(4, true);
     }
 
     private void updateSchedule() {

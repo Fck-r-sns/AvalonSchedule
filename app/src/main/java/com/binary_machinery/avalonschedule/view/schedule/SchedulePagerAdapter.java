@@ -9,7 +9,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,28 +22,29 @@ import java.util.Map;
  */
 public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
 
-    Context m_context;
-    List<ScheduleRecord> m_records;
+    final Context m_context;
+    final List<ScheduleRecord> m_records;
+    final Date m_minDate;
 
     public SchedulePagerAdapter(Context context, FragmentManager fm, List<ScheduleRecord> records) {
         super(fm);
         m_context = context;
         m_records = records;
+        m_minDate = (!m_records.isEmpty()) ? m_records.get(0).date : Calendar.getInstance().getTime();
     }
 
     @Override
     public Fragment getItem(int position) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setFirstDayOfWeek(Calendar.MONDAY);
-        calendar.add(Calendar.WEEK_OF_MONTH, position);
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-        long from = calendar.getTimeInMillis();
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        long to = calendar.getTimeInMillis();
+        long from = getMonday(position).getTimeInMillis();
+        long to = getSunday(position).getTimeInMillis();
 
-        int firstDayIdx = 0;
-        int lastDayIdx = 0;
-        for (int i = 0; i < m_records.size(); ++i) {
+        int firstDayIdx = (!m_records.isEmpty()) ? 0 : Integer.MAX_VALUE;
+        int lastDayIdx = Integer.MIN_VALUE;
+        for (int i = 0; i <= m_records.size(); ++i) {
+            if (i >= m_records.size()) {
+                firstDayIdx = Integer.MAX_VALUE;
+                break;
+            }
             long time = m_records.get(i).date.getTime();
             if (time < from) {
                 firstDayIdx = i;
@@ -49,6 +53,10 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
             }
         }
         for (int i = firstDayIdx; i < m_records.size(); ++i) {
+            if (i >= m_records.size()) {
+                lastDayIdx = Integer.MIN_VALUE;
+                break;
+            }
             long time = m_records.get(i).date.getTime();
             if (time < to) {
                 lastDayIdx = i;
@@ -65,6 +73,7 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
             recordsByWeekday.put(c.get(Calendar.DAY_OF_WEEK), record);
         }
 
+        Calendar calendar = getMonday(position);
         for (int i = Calendar.SUNDAY; i <= Calendar.SATURDAY; ++i) {
             if (!recordsByWeekday.containsKey(i)) {
                 ScheduleRecord stubRecord = new ScheduleRecord();
@@ -89,11 +98,30 @@ public class SchedulePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;
+        return 1000;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "Page #" + position;
+        Calendar monday = getMonday(position);
+        Calendar sunday = getSunday(position);
+        DateFormat formatter = new SimpleDateFormat("dd.MM");
+        return formatter.format(monday.getTime()) + " - " + formatter.format(sunday.getTime());
+    }
+
+    private Calendar getMonday(int position) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(m_minDate);
+        calendar.add(Calendar.WEEK_OF_MONTH, position);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        return calendar;
+    }
+
+    private Calendar getSunday(int position) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(m_minDate);
+        calendar.add(Calendar.WEEK_OF_MONTH, position);
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        return calendar;
     }
 }

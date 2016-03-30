@@ -5,12 +5,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.support.v7.app.NotificationCompat;
+import android.view.View;
 import android.widget.Toast;
 
 import com.binary_machinery.avalonschedule.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by fckrsns on 27.03.2016.
@@ -49,5 +51,12 @@ public class Utils {
 
                 });
         builder.create().show();
+    }
+
+    public static int getColorForDate(View view, Date date) {
+        Calendar calendar = Calendar.getInstance();
+        boolean isToday = Constants.DATE_FORMAT.format(date).equals(Constants.DATE_FORMAT.format(calendar.getTime()));
+        int colorId = (isToday) ? R.color.colorNearestCourse : R.color.colorTransparent;
+        return view.getResources().getColor(colorId);
     }
 }
