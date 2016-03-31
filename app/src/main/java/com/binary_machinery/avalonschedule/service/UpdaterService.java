@@ -61,7 +61,7 @@ public class UpdaterService extends Service {
                                     PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, changesIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                                     Utils.showNotification(this, getString(R.string.on_schedule_changed_notification), pendingIntent);
                                 } else {
-                                    Utils.showNotification(this, getString(R.string.on_schedule_no_changes_notification), null);
+//                                    Utils.showNotification(this, getString(R.string.on_schedule_no_changes_notification), null);
                                 }
                             },
                             throwable -> {
