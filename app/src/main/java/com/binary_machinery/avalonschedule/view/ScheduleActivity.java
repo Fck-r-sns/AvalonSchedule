@@ -12,6 +12,7 @@ import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.data.Schedule;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
+import com.binary_machinery.avalonschedule.service.ServiceLauncher;
 import com.binary_machinery.avalonschedule.tools.DbProvider;
 import com.binary_machinery.avalonschedule.tools.ScheduleStorager;
 import com.binary_machinery.avalonschedule.tools.ScheduleUpdater;
@@ -48,6 +49,11 @@ public class ScheduleActivity extends AppCompatActivity {
             if (message != null) {
                 Utils.showMessageDialog(this, message);
             }
+        }
+
+        SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
+        if (!prefs.contains(Constants.PREF_IS_SERVICE_ENABLED)) {
+            new ServiceLauncher(this).start();
         }
     }
 

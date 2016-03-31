@@ -19,11 +19,11 @@
         android:id="@+id/start_service_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:text="@string/start_button_text"
-        android:layout_below="@+id/textView3"
-        android:minWidth="120dp" />
+        android:minWidth="120dp"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/stop_service_button"
@@ -89,5 +89,26 @@
         android:layout_toLeftOf="@+id/stop_service_button"
         android:layout_toStartOf="@+id/stop_service_button"
         android:minWidth="120dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/status_caption"
+        android:id="@+id/textView11"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/status_disabled"
+        android:id="@+id/service_status"
+        android:layout_below="@+id/textView3"
+        android:layout_toRightOf="@+id/textView11"
+        android:layout_toEndOf="@+id/textView11"
+        android:layout_marginLeft="16dp" />
 
 </RelativeLayout>

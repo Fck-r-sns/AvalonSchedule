@@ -1,18 +1,15 @@
 package com.binary_machinery.avalonschedule.view;
 
 import android.app.ActionBar;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.binary_machinery.avalonschedule.R;
-import com.binary_machinery.avalonschedule.service.UpdaterService;
+import com.binary_machinery.avalonschedule.service.ServiceLauncher;
 import com.binary_machinery.avalonschedule.utils.Constants;
 import com.binary_machinery.avalonschedule.utils.Utils;
 
@@ -27,6 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+
+        updateServiceStatusWidget();
 
         final SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
         final SharedPreferences.Editor prefEditor = prefs.edit();
@@ -43,30 +42,29 @@ public class SettingsActivity extends AppCompatActivity {
             Utils.showToast(this, R.string.url_saved);
         });
 
-        final Intent serviceLaunchIntent = new Intent(SettingsActivity.this, UpdaterService.class);
-        final PendingIntent pendingIntent = PendingIntent.getService(SettingsActivity.this, 0, serviceLaunchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        final AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        final ServiceLauncher serviceLauncher = new ServiceLauncher(this);
 
         Button startServiceButton = (Button) findViewById(R.id.start_service_button);
         startServiceButton.setOnClickListener(v -> {
-            prefEditor.putBoolean(Constants.PREF_IS_SERVICE_ENABLED, true);
-            prefEditor.apply();
-            am.setInexactRepeating(
-                    AlarmManager.RTC,
-                    System.currentTimeMillis(),
-                    Constants.UPDATE_INTERVAL,
-                    pendingIntent
-            );
+            serviceLauncher.start();
             Utils.showToast(this, R.string.service_started);
+            updateServiceStatusWidget();
         });
 
         Button stopServiceButton = (Button) findViewById(R.id.stop_service_button);
         stopServiceButton.setOnClickListener(v -> {
-            prefEditor.putBoolean(Constants.PREF_IS_SERVICE_ENABLED, false);
-            prefEditor.apply();
-            am.cancel(pendingIntent);
+            serviceLauncher.stop();
             Utils.showToast(this, R.string.service_stopped);
+            updateServiceStatusWidget();
         });
+    }
+
+    private void updateServiceStatusWidget() {
+        SharedPreferences prefs = getSharedPreferences(Constants.PREFERENCES_NAME, MODE_PRIVATE);
+        boolean started = prefs.getBoolean(Constants.PREF_IS_SERVICE_ENABLED, false);
+        TextView statusView = (TextView) findViewById(R.id.service_status);
+        String statusText = getString(started ? R.string.status_enabled : R.string.status_disabled);
+        statusView.setText(statusText);
     }
 
 }

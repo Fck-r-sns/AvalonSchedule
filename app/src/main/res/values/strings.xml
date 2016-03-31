@@ -26,6 +26,9 @@
     <string name="url_is_empty">URL is empty</string>
 
     <string name="autoupdate_service_caption">Autoupdate every hour</string>
+    <string name="status_caption">Status:</string>
+    <string name="status_disabled">disabled</string>
+    <string name="status_enabled">enabled</string>
     <string name="service_started">Service started</string>
     <string name="service_stopped">Service stopped</string>
 
