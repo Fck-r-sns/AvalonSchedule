@@ -6,5 +6,3 @@ TODO: show UpdateService status in settings (enabled / disabled)
 TODO: check it on emulator with android 4.0+
 TODO: check other TODOs in code
 TODO: fill transparent parts on icon with white color
-TODO: fix color fill for "No study" days
-TODO: increase timeout for ScheduleLoader

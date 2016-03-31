@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/record_root_layout"
@@ -20,13 +19,13 @@
                 android:id="@+id/record_weekday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Среда" />
+                android:text="Weekday" />
 
             <TextView
                 android:id="@+id/record_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16.02.16" />
+                android:text="XX.XX.XX" />
 
         </LinearLayout>
 
@@ -50,4 +49,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
