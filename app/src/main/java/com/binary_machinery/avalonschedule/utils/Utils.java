@@ -29,7 +29,7 @@ public class Utils {
 
     public static void showNotification(Context context, String message, PendingIntent intent) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        builder.setSmallIcon(R.drawable.icon);
+        builder.setSmallIcon(R.drawable.icon_transparent);
         builder.setAutoCancel(true);
         builder.setContentTitle(context.getString(R.string.app_name));
         SimpleDateFormat formater = new SimpleDateFormat("hh:mm");
