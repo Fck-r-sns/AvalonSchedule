@@ -49,18 +49,10 @@ public class UpdaterService extends Service {
                                 }
                             },
                             throwable -> {
-                                StackTraceElement[] stack = throwable.getStackTrace();
-                                String stackString = throwable.getMessage() + "\n";
-                                stackString += throwable.toString() + "\n";
-                                for (StackTraceElement e : stack) {
-                                    stackString += e.toString() + "\n";
-                                }
                                 Intent messageIntent = new Intent(this, ScheduleActivity.class);
-//                                messageIntent.putExtra(Constants.MESSAGE_EXTRA, throwable.getMessage());
-                                messageIntent.putExtra(Constants.MESSAGE_EXTRA, stackString);
+                                messageIntent.putExtra(Constants.MESSAGE_EXTRA, throwable.getMessage());
                                 PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, messageIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                                 Utils.showNotification(this, throwable.getMessage(), pendingIntent);
-                                Utils.showNotification(this, stackString, pendingIntent);
                             }
                     );
         }
