@@ -48,7 +48,7 @@ public class Utils {
         builder.setSmallIcon(R.drawable.icon_transparent);
         builder.setAutoCancel(true);
         builder.setContentTitle(context.getString(R.string.app_name));
-        SimpleDateFormat formater = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat formater = new SimpleDateFormat("HH:mm");
         String timeString = formater.format(Calendar.getInstance().getTime());
         builder.setContentText(timeString + ": " + message);
 
