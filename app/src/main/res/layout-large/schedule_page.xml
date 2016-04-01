@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/layoutMonday"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.143" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/layoutTuesday"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.143" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/layoutWednesday"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.143" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/layoutThursday"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.143" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/layoutFriday"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.143" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/layoutSaturday"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.143" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lineSeparatorColor" />
+
+    <FrameLayout
+        android:id="@+id/layoutSunday"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.143" />
+
+</LinearLayout>

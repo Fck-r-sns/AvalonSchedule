@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="activity_horizontal_margin">64dp</dimen>
+    <dimen name="record_size">14sp</dimen>
+    <dimen name="record_important_size">15sp</dimen>
+</resources>

@@ -16,40 +16,47 @@
             android:orientation="vertical">
 
             <TextView
-                android:textSize="@dimen/record_important_size"
                 android:id="@+id/record_weekday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Среда" />
+                android:text="Среда"
+                android:textSize="@dimen/record_important_size" />
 
             <TextView
-                android:textSize="@dimen/record_size"
                 android:id="@+id/record_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16.02.16" />
+                android:text="16.02.16"
+                android:textSize="@dimen/record_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="120dp"
+            android:layout_height="match_parent">
 
             <TextView
-                android:layout_marginTop="6dp"
-                android:textSize="@dimen/record_size"
                 android:id="@+id/record_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="18.00-21.20" />
+                android:text="18.00-21.20"
+                android:textSize="@dimen/record_size" />
 
             <TextView
-                android:textSize="@dimen/record_size"
                 android:id="@+id/record_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Лекция" />
+                android:text="Лекция"
+                android:textSize="@dimen/record_size" />
 
             <TextView
-                android:textSize="@dimen/record_size"
                 android:id="@+id/record_room"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Аудитория №102" />
+                android:text="Аудитория №102"
+                android:textSize="@dimen/record_size" />
 
         </LinearLayout>
 
@@ -61,18 +68,18 @@
             android:orientation="vertical">
 
             <TextView
-                android:textSize="@dimen/record_important_size"
                 android:id="@+id/record_course"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Объектно-ориентированное программирование (Java, Oracle JDeveloper)" />
+                android:text="Объектно-ориентированное программирование (Java, Oracle JDeveloper)"
+                android:textSize="@dimen/record_important_size" />
 
             <TextView
-                android:textSize="@dimen/record_size"
                 android:id="@+id/record_lecturer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Булатов Алексей Витальевич" />
+                android:text="Булатов Алексей Витальевич"
+                android:textSize="@dimen/record_size" />
 
         </LinearLayout>
 

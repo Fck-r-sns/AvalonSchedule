@@ -4,81 +4,87 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineSeparatorColor" />
+        android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/layoutMonday"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.143" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineSeparatorColor" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineSeparatorColor" />
 
-    <FrameLayout
-        android:id="@+id/layoutTuesday"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.143" />
+            <FrameLayout
+                android:id="@+id/layoutMonday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineSeparatorColor" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineSeparatorColor" />
 
-    <FrameLayout
-        android:id="@+id/layoutWednesday"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.143" />
+            <FrameLayout
+                android:id="@+id/layoutTuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineSeparatorColor" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineSeparatorColor" />
 
-    <FrameLayout
-        android:id="@+id/layoutThursday"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.143" />
+            <FrameLayout
+                android:id="@+id/layoutWednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineSeparatorColor" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineSeparatorColor" />
 
-    <FrameLayout
-        android:id="@+id/layoutFriday"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.143" />
+            <FrameLayout
+                android:id="@+id/layoutThursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineSeparatorColor" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineSeparatorColor" />
 
-    <FrameLayout
-        android:id="@+id/layoutSaturday"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.143" />
+            <FrameLayout
+                android:id="@+id/layoutFriday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/lineSeparatorColor" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineSeparatorColor" />
 
-    <FrameLayout
-        android:id="@+id/layoutSunday"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.143" />
+            <FrameLayout
+                android:id="@+id/layoutSaturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lineSeparatorColor" />
+
+            <FrameLayout
+                android:id="@+id/layoutSunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
