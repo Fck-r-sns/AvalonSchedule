@@ -47,13 +47,13 @@
     <string name="about_email" translatable="false">binary.machinery@gmail.com</string>
     <string name="about_source_code_caption">Source code:</string>
     <string name="about_source_code" translatable="false">https://github.com/Fck-r-sns/AvalonSchedule</string>
-    <string name="about_icon">Icon by Paresh D (https://www.iconfinder.com/pareshdhake)</string>
+    <string name="about_icon">Icon by YMB Properties (http://ymbproperties.com/)</string>
 
     <string name="ok_button_text">OK</string>
 
     <string name="no_study_today">No study</string>
 
-    <string-array name="weekdays">
+    <string-array name="weekdays" translatable="false">
         <item>Воскресение</item>
         <item>Понедельник</item>
         <item>Вторник</item>
