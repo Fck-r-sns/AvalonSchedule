@@ -2,3 +2,4 @@ TODO: AboutActivity: fix links overlapping after wrapping on phones with small s
 TODO: add exams highligthing
 TODO: use group selection instead of direct url
 TODO: change error message system
+TODO: try to find source of exception "invalid index 0, size is 0"
