@@ -64,4 +64,6 @@
         <item>Суббота</item>
     </string-array>
 
+    <string name="exam_type" translatable="false">Экзамен</string>
+
 </resources>

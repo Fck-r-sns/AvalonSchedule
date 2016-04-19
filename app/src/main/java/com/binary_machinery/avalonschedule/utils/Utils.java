@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.binary_machinery.avalonschedule.R;
+import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -69,10 +70,22 @@ public class Utils {
         builder.create().show();
     }
 
-    public static int getColorForDate(View view, Date date) {
+    public static int getColorForRecord(View view, ScheduleRecord record) {
+        Date date = record.date;
         Calendar calendar = Calendar.getInstance();
         boolean isToday = Constants.DATE_FORMAT.format(date).equals(Constants.DATE_FORMAT.format(calendar.getTime()));
-        int colorId = (isToday) ? R.color.colorNearestCourse : R.color.colorTransparent;
+        int colorId = R.color.colorTransparent;
+        if (isToday) {
+            colorId = R.color.colorNearestCourse;
+        } else {
+            if (record.type != null) {
+                String currentTypeString = record.type.trim();
+                String examTypeString = view.getResources().getString(R.string.exam_type);
+                if (currentTypeString.equals(examTypeString)) {
+                    colorId = R.color.colorExamDay;
+                }
+            }
+        }
         return view.getResources().getColor(colorId);
     }
 }

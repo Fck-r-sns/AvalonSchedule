@@ -52,10 +52,9 @@ public class RecordFragment extends Fragment {
             setText(view, R.id.record_course, record.course);
             setText(view, R.id.record_lecturer, record.lecturer);
 
-            int color = Utils.getColorForDate(view, record.date);
+            int color = Utils.getColorForRecord(view, record);
             view.findViewById(R.id.record_root_layout).setBackgroundColor(color);
         }
-
 
         return view;
     }

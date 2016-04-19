@@ -43,7 +43,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_author_caption"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_caption_size" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_author"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_value_size" />
 
     <View
@@ -68,7 +68,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_email_caption"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_caption_size" />
 
     <TextView
@@ -78,7 +78,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_email"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_value_size" />
 
     <View
@@ -94,7 +94,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_source_code_caption"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_caption_size" />
 
     <TextView
@@ -104,7 +104,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_source_code"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_value_size" />
 
     <View
@@ -120,7 +120,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_icon_caption"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_caption_size" />
 
     <TextView
@@ -130,7 +130,7 @@
         android:layout_marginLeft="@dimen/about_field_horizontal_margin"
         android:layout_marginStart="@dimen/about_field_horizontal_margin"
         android:text="@string/about_icon"
-        android:textColor="@color/aboutTextColor"
+        android:textColor="@color/colorTextAbout"
         android:textSize="@dimen/about_value_size" />
 
 </LinearLayout>

@@ -3,8 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="lineSeparatorColor">#A1A1A1</color>>
+    <color name="lineSeparatorColor">#A1A1A1</color>
     <color name="colorNearestCourse">#BCE2BF</color>
-    <color name="colorTransparent">#00000000</color>>
-    <color name="aboutTextColor">#505050</color>>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorTextAbout">#505050</color>
+    <color name="colorExamDay">#ffaeae</color>
 </resources>

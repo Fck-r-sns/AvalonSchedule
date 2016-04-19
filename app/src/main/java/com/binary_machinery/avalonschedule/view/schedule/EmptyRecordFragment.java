@@ -48,7 +48,7 @@ public class EmptyRecordFragment extends Fragment {
             setText(view, R.id.record_date, Constants.DATE_FORMAT.format(record.date));
             setText(view, R.id.record_weekday, record.weekday);
 
-            int color = Utils.getColorForDate(view, record.date);
+            int color = Utils.getColorForRecord(view, record);
             view.findViewById(R.id.record_root_layout).setBackgroundColor(color);
         }
 
