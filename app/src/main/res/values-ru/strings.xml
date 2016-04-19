@@ -4,7 +4,6 @@
     <string name="about_activity_title">О программе</string>
     <string name="about_author">Приходько Евгений</string>
     <string name="about_author_caption">Автор:</string>
-    <string name="about_icon">Иконка: YMB Properties (http://ymbproperties.com/)</string>
     <string name="about_source_code_caption">Исходники:</string>
     <string name="added_records_caption">Добавлено</string>
     <string name="autoupdate_service_caption">Автоматическое обновление каждый час</string>
@@ -35,4 +34,5 @@
     <string name="status_caption">Статус:</string>
     <string name="status_disabled">остановлено</string>
     <string name="status_enabled">запущено</string>
+    <string name="about_icon_caption">Иконка</string>
 </resources>

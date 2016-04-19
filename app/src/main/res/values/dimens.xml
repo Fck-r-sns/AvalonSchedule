@@ -5,4 +5,8 @@
     <dimen name="caption_size">22sp</dimen>
     <dimen name="record_size">10sp</dimen>
     <dimen name="record_important_size">12sp</dimen>
+
+    <dimen name="about_field_horizontal_margin">16dp</dimen>
+    <dimen name="about_caption_size">20sp</dimen>
+    <dimen name="about_value_size">14sp</dimen>
 </resources>
