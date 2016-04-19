@@ -54,7 +54,7 @@ public class UpdaterService extends Service {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             schedule -> {
-                                if (env.addedRecords.size() != 0 || env.deletedRecords.size() != 0) {
+                                if (!env.addedRecords.isEmpty() || !env.deletedRecords.isEmpty()) {
                                     SharedPreferences.Editor editor = prefs.edit();
                                     editor.putBoolean(Constants.PREF_SCHEDULE_CHANGED, true);
                                     Intent changesIntent = new Intent(this, ChangesActivity.class);
