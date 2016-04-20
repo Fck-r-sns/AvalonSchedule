@@ -34,7 +34,7 @@
     <string name="status_caption">Статус:</string>
     <string name="status_disabled">остановлено</string>
     <string name="status_enabled">запущено</string>
-    <string name="about_icon_caption">Иконка</string>
+    <string name="about_icon_caption">Иконка:</string>
     <string name="title_last_update_date">Последняя проверка:</string>
     <string name="several_tries_failed_error_message">Ошибка. %s часа с последней успешной проверки расписания</string>
 </resources>

@@ -49,8 +49,8 @@
     <string name="about_email" translatable="false">binary.machinery@gmail.com</string>
     <string name="about_source_code_caption">Source code:</string>
     <string name="about_source_code" translatable="false">https://github.com/Fck-r-sns/AvalonSchedule</string>
-    <string name="about_icon_caption">Icon</string>
-    <string name="about_icon" translatable="false">YMB Properties (http://ymbproperties.com/)</string>
+    <string name="about_icon_caption">Icon:</string>
+    <string name="about_icon" translatable="false">YMB Properties ( http://ymbproperties.com/ )</string>
 
     <string name="ok_button_text">OK</string>
 
