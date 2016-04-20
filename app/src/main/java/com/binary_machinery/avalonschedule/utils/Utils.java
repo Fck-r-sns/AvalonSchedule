@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.NotificationCompat;
 import android.view.View;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import com.binary_machinery.avalonschedule.R;
 import com.binary_machinery.avalonschedule.data.ScheduleRecord;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,9 +51,7 @@ public class Utils {
         builder.setSmallIcon(R.drawable.icon_transparent);
         builder.setAutoCancel(true);
         builder.setContentTitle(context.getString(R.string.app_name));
-        SimpleDateFormat formater = new SimpleDateFormat("HH:mm");
-        String timeString = formater.format(Calendar.getInstance().getTime());
-        builder.setContentText(timeString + ": " + message);
+        builder.setContentText(message);
 
         if (intent != null) {
             builder.setContentIntent(intent);
@@ -87,5 +87,19 @@ public class Utils {
             }
         }
         return view.getResources().getColor(colorId);
+    }
+
+    public static Date getLastUpdateDateString(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences(Constants.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        String dateString = prefs.getString(Constants.PREF_SCHEDULE_LAST_CHECK_DATE, null);
+        if (dateString == null) {
+            return null;
+        }
+        try {
+            return Constants.TIME_FORMAT.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

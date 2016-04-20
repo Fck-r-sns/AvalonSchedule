@@ -16,9 +16,16 @@
 
 package com.binary_machinery.avalonschedule.tools;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.binary_machinery.avalonschedule.data.GlobalEnvironment;
 import com.binary_machinery.avalonschedule.data.Schedule;
 import com.binary_machinery.avalonschedule.data.ScheduleMetadata;
+import com.binary_machinery.avalonschedule.utils.Constants;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import rx.Observable;
 import rx.schedulers.Schedulers;
@@ -27,7 +34,7 @@ import rx.schedulers.Schedulers;
  * Created by fckrsns on 11.03.2016.
  */
 public class ScheduleUpdater {
-    public static Observable<Schedule> get(String sourceUrl) {
+    public static Observable<Schedule> get(Context context, String sourceUrl) {
         GlobalEnvironment env = GlobalEnvironment.getInstance();
         ScheduleStorager storager = new ScheduleStorager(env.dbProvider);
         return Observable.just(sourceUrl)
@@ -53,6 +60,15 @@ public class ScheduleUpdater {
                         storager.storeDeletedRecords(env.deletedRecords);
                         storager.storeAddedRecords(env.addedRecords);
                     }
+                    return schedule;
+                })
+                .map(schedule -> {
+                    SharedPreferences prefs = context.getSharedPreferences(Constants.PREFERENCES_NAME, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    Date date = Calendar.getInstance().getTime();
+                    String dateString = Constants.TIME_FORMAT.format(date);
+                    editor.putString(Constants.PREF_SCHEDULE_LAST_CHECK_DATE, dateString);
+                    editor.apply();
                     return schedule;
                 });
     }

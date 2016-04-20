@@ -16,6 +16,7 @@
 
 package com.binary_machinery.avalonschedule.view;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ import com.binary_machinery.avalonschedule.utils.Utils;
 import com.binary_machinery.avalonschedule.view.schedule.SchedulePagerAdapter;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import rx.Observable;
@@ -120,7 +122,7 @@ public class ScheduleActivity extends AppCompatActivity {
         String sourceUrl = prefs.getString(Constants.PREF_URL, "");
         Utils.showToast(this, R.string.task_loading_in_process);
         Observable.just(sourceUrl)
-                .concatMap(ScheduleUpdater::get)
+                .concatMap(s -> ScheduleUpdater.get(this, s))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         schedule -> {
@@ -129,9 +131,7 @@ public class ScheduleActivity extends AppCompatActivity {
                             m_currentWeekIdx = findTodayCourse(records);
                             scrollToTodayCourse();
                         },
-                        throwable -> {
-                            Utils.showMessageDialog(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage());
-                        },
+                        throwable -> Utils.showMessageDialog(this, getString(R.string.task_loading_failed) + ": " + throwable.getMessage()),
                         () -> Utils.showToast(this, R.string.task_loading_finished)
                 );
     }
@@ -155,6 +155,7 @@ public class ScheduleActivity extends AppCompatActivity {
         SchedulePagerAdapter adapter = new SchedulePagerAdapter(this, getSupportFragmentManager(), records);
         ViewPager pager = (ViewPager) findViewById(R.id.schedulePager);
         pager.setAdapter(adapter);
+
     }
 
     private static int findTodayCourse(List<ScheduleRecord> records) {

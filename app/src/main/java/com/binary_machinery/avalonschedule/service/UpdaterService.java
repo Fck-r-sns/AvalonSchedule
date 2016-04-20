@@ -31,6 +31,9 @@ import com.binary_machinery.avalonschedule.utils.Utils;
 import com.binary_machinery.avalonschedule.view.ChangesActivity;
 import com.binary_machinery.avalonschedule.view.ScheduleActivity;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 
@@ -50,13 +53,14 @@ public class UpdaterService extends Service {
             Utils.showToast(this, R.string.task_loading_failed);
         } else {
             Observable.just(sourceUrl)
-                    .concatMap(ScheduleUpdater::get)
+                    .concatMap(s -> ScheduleUpdater.get(this, s))
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             schedule -> {
+                                SharedPreferences.Editor editor = prefs.edit();
                                 if (!env.addedRecords.isEmpty() || !env.deletedRecords.isEmpty()) {
-                                    SharedPreferences.Editor editor = prefs.edit();
                                     editor.putBoolean(Constants.PREF_SCHEDULE_CHANGED, true);
+                                    editor.apply();
                                     Intent changesIntent = new Intent(this, ChangesActivity.class);
                                     PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, changesIntent, PendingIntent.FLAG_UPDATE_CURRENT);
                                     Utils.showNotification(this, getString(R.string.on_schedule_changed_notification), pendingIntent);
@@ -65,10 +69,22 @@ public class UpdaterService extends Service {
                                 }
                             },
                             throwable -> {
-                                Intent messageIntent = new Intent(this, ScheduleActivity.class);
-                                messageIntent.putExtra(Constants.MESSAGE_EXTRA, throwable.getMessage());
-                                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, messageIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                                Utils.showNotification(this, throwable.getMessage(), pendingIntent);
+                                Long currentTime = Calendar.getInstance().getTimeInMillis();
+                                Date lastUpdateDate = Utils.getLastUpdateDateString(this);
+                                if (lastUpdateDate != null) {
+                                    long delta = currentTime - lastUpdateDate.getTime();
+                                    if (delta > Constants.ALARM_TIME_SINCE_LAST_UPDATE_MS) {
+                                        Intent messageIntent = new Intent(this, ScheduleActivity.class);
+                                        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, messageIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                        String errorMessage = getResources().getString(R.string.several_tries_failed_error_message);
+                                        errorMessage = String.format(errorMessage, Constants.ALARM_TIME_SINCE_LAST_UPDATE_HOURS);
+                                        Utils.showNotification(this, errorMessage, pendingIntent);
+                                    }
+                                }
+//                                Intent messageIntent = new Intent(this, ScheduleActivity.class);
+//                                messageIntent.putExtra(Constants.MESSAGE_EXTRA, throwable.getMessage());
+//                                PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, messageIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//                                Utils.showNotification(this, throwable.getMessage(), pendingIntent);
                             }
                     );
         }
