@@ -1,3 +1,4 @@
 TODO: use group selection instead of direct url
 TODO: change error message system
 TODO: try to find source of exception "invalid index 0, size is 0"
+TODO: get current version from package info
