@@ -1,5 +1,2 @@
 # AvalonSchedule
-https://play.google.com/store/apps/details?id=com.binary_machinery.avalonschedule&hl=ru
-
-Приложение отображает расписание занятий в Высшей Инженерной Школе СПБГПУ в виде, адаптированном под мобильные устройства, а так же своевременно оповещает об изменениях в расписании, чтобы никто не приехал на отмененное занятие. 
-Обновлять информацию можно как вручную, так и автоматически раз в час.
+The app loads the schedule’s webpage and parses HTML to get a table from it. Every 2 hours, the app’s background job checks the schedule in the background, and if it changes, it notifies the user about it.
